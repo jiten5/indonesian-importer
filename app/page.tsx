@@ -126,8 +126,7 @@ export default function HomePage() {
           {/* Hero Heading */}
           <motion.div variants={fadeInUp} className="text-center max-w-4xl mx-auto mb-12">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-neutral-50 mb-6 leading-tight">
-              Unlock Global Trade Intelligence with{' '}
-              <span className="text-primary-600 dark:text-primary-400">Real-Time Data</span>
+              Unlock Global Trade Intelligence with <span className="text-primary-600 dark:text-primary-400">Real-Time Data</span>
             </h1>
             <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 mb-8">
               Access comprehensive import/export data from 195+ countries. Make informed decisions
