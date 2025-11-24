@@ -72,13 +72,7 @@ const nextConfig = {
     optimizeCss: true,
     scrollRestoration: true,
   },
-  
-  // Turbopack config for Next.js 16
-  turbopack: {
-    resolveAlias: {
-      '@': './src',
-    },
-  },
+  // Remove Turbopack config
   
   // Production optimization
   compiler: {

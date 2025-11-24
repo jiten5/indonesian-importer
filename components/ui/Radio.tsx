@@ -10,7 +10,8 @@ interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, '
 
 const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
   ({ label, description, error, containerClassName, className, id, ...props }, ref) => {
-    const radioId = id || `radio-${Math.random().toString(36).substr(2, 9)}`
+    const generatedId = React.useId()
+    const radioId = id || `radio-${generatedId}`
 
     return (
       <div className={cn('flex items-start', containerClassName)}>

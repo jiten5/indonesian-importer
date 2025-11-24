@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
-import { cn } from '@/utils/cn'
+import { cn } from '@/lib/utils'
 import { ChevronLeft, ChevronRight, Database, Search, TrendingUp } from 'lucide-react'
 
 const Navbar = dynamic(() => import('@/components/layout/Navbar'), { ssr: false })

@@ -6,7 +6,7 @@ import Button from './Button';
 import Badge from './Badge';
 import { Check, Sparkles } from 'lucide-react';
 import { PricingPlan } from '@/types';
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 
 interface PricingCardProps {
   plan: PricingPlan;

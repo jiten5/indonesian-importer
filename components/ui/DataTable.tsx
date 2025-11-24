@@ -16,7 +16,7 @@ import {
 import { ArrowUpDown, ArrowUp, ArrowDown, Download, Search } from 'lucide-react';
 import Button from './Button';
 import { Pagination } from './Pagination';
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

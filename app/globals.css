@@ -1,35 +1,58 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* ====================================
    CSS VARIABLES - DESIGN TOKENS
    ==================================== */
 
 :root {
-  /* Primary Blue - Trust & Data */
-  --primary-50: #eff6ff;
-  --primary-100: #dbeafe;
-  --primary-200: #bfdbfe;
-  --primary-300: #93c5fd;
-  --primary-400: #60a5fa;
-  --primary-500: #3b82f6;
-  --primary-600: #2563eb;
-  --primary-700: #1d4ed8;
-  --primary-800: #1e40af;
-  --primary-900: #1e3a8a;
-  --primary-950: #172554;
+  /* Shadcn Design Tokens */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  --radius: 0.5rem;
 
-  /* Secondary Purple - Vibrant Accent */
-  --secondary-50: #faf5ff;
-  --secondary-100: #f3e8ff;
-  --secondary-200: #e9d5ff;
-  --secondary-300: #d8b4fe;
-  --secondary-400: #c084fc;
-  --secondary-500: #a855f7;
-  --secondary-600: #9333ea;
-  --secondary-700: #7e22ce;
-  --secondary-800: #6b21a8;
-  --secondary-900: #581c87;
-  --secondary-950: #3b0764;
+  /* Primary Indigo - Trust & Data */
+  --primary-50: #F0F4FF;
+  --primary-100: #E0E9FF;
+  --primary-200: #C7D7FE;
+  --primary-300: #A5BCFD;
+  --primary-400: #8199FA;
+  --primary-500: #6366F1;
+  --primary-600: #4F46E5;
+  --primary-700: #4338CA;
+  --primary-800: #3730A3;
+  --primary-900: #312E81;
+  --primary-950: #1E1B4B;
+
+  /* Secondary Teal - Vibrant Accent */
+  --secondary-50: #F0FDFA;
+  --secondary-100: #CCFBF1;
+  --secondary-200: #99F6E4;
+  --secondary-300: #5EEAD4;
+  --secondary-400: #2DD4BF;
+  --secondary-500: #14B8A6;
+  --secondary-600: #0D9488;
+  --secondary-700: #0F766E;
+  --secondary-800: #115E59;
+  --secondary-900: #134E4A;
 
   /* Success Green */
   --success-50: #f0fdf4;
@@ -130,6 +153,27 @@
 }
 
 .dark {
+  /* Shadcn Dark Mode Tokens */
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 48%;
+
   --bg-primary: #0a0a0a;
   --bg-secondary: #171717;
   --bg-tertiary: #262626;
@@ -145,8 +189,6 @@
 
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
 html {
@@ -158,9 +200,11 @@ html {
 
 body {
   font-family: var(--font-primary, system-ui, -apple-system, sans-serif);
-  line-height: 1.6;
+  font-size: 1.125rem; /* 18px base for better readability */
+  line-height: 1.7;
   overflow-x: hidden;
-  color: var(--neutral-700);
+  color: var(--neutral-800);
+  background-color: #ffffff;
 }
 
 .dark body {
@@ -200,9 +244,21 @@ body {
   background-color: #737373;
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* Headings hierarchy for homepage sections */
+h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.2;
+
 }
 
 .container-custom {
@@ -211,6 +267,32 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+/* Section vertical spacing utility */
+.section-spacing {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (max-width: 768px) {
+  .section-spacing {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* Section background utility */
+.section-bg {
+  background-color: var(--neutral-50);
+}
+.section-bg-dark {
+  background-color: var(--neutral-900);
+}
+
+/* Card grid spacing utility */
+.card-spacing {
+  gap: 2.5rem;
 }
 
 @media (min-width: 640px) {
@@ -228,10 +310,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .text-gradient {
-  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 25%, #0D9488 75%, #14B8A6 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: #4F46E5; /* Fallback for browsers that don't support background-clip */
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Dark mode gradient adjustment */
+.dark .text-gradient {
+  background: linear-gradient(135deg, #8199FA 0%, #A78BFA 25%, #2DD4BF 75%, #5EEAD4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #8199FA;
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
 }
 
 /* Utility Classes */
@@ -256,8 +352,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::selection {
-  background-color: rgba(59, 130, 246, 0.2);
-  color: #1e3a8a;
+  background-color: rgba(79, 70, 229, 0.2);
+  color: #1E1B4B;
+}
+
+.dark ::selection {
+  background-color: rgba(129, 153, 250, 0.3);
+  color: #F0F4FF;
 }
 
 /* Custom Animations */
@@ -303,14 +404,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .animate-fade-in {
   animation: fade-in 0.2s ease-out forwards;
+  will-change: opacity, transform;
 }
 
 .animate-slide-in {
   animation: slide-in 0.3s ease-out forwards;
+  will-change: opacity, transform;
 }
 
 .animate-shimmer {
   animation: shimmer 2s infinite linear;
+  will-change: background-position;
 }
 
 .bg-stripes {
@@ -325,6 +429,17 @@ h1, h2, h3, h4, h5, h6 {
   animation: progress-stripes 1s linear infinite;
 }
 
+/* Enhanced Focus Styles for Accessibility */
+*:focus-visible {
+  outline: 2px solid #4F46E5;
+  outline-offset: 2px;
+}
+
+.dark *:focus-visible {
+  outline-color: #8199FA;
+}
+
+/* Skip animations for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -332,5 +447,44 @@ h1, h2, h3, h4, h5, h6 {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    will-change: auto !important;
+  }
+  
+  .animate-fade-in,
+  .animate-slide-in,
+  .animate-shimmer {
+    animation: none !important;
+  }
+}
+
+/* Improved Button Touch Targets for Mobile */
+@media (max-width: 768px) {
+  button:not(.no-min-size),
+  a:not(.no-min-size) {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Enhanced Card Hover States */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+}
+
+.dark .card-hover:hover {
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 10px 10px -5px rgb(0 0 0 / 0.1);
+}
+
+/* Improved Table Responsiveness */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }

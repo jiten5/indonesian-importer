@@ -9,23 +9,23 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   ({ variant = 'default', size = 'md', children, className, ...props }, ref) => {
-    const baseStyles = 'inline-flex items-center font-medium rounded-full'
+    const baseStyles = 'inline-flex items-center font-semibold rounded-full shadow-md hover:shadow-lg transition-all duration-300'
     
     const variants = {
       default: 'bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-100',
-      primary: 'bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300',
-      secondary: 'bg-secondary-100 text-secondary-700 dark:bg-secondary-900 dark:text-secondary-300',
-      success: 'bg-success-50 text-success-700',
-      warning: 'bg-warning-50 text-warning-700',
-      error: 'bg-error-50 text-error-700',
-      info: 'bg-info-50 text-info-700',
-      outline: 'border-2 border-neutral-300 text-neutral-700 dark:border-neutral-700 dark:text-neutral-300'
+      primary: 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-primary-500/30 hover:shadow-primary-500/50 hover:scale-105',
+      secondary: 'bg-gradient-to-r from-secondary-500 to-secondary-600 text-white shadow-secondary-500/30 hover:shadow-secondary-500/50 hover:scale-105',
+      success: 'bg-success-500 text-white shadow-success-500/30',
+      warning: 'bg-warning-500 text-white shadow-warning-500/30',
+      error: 'bg-error-500 text-white shadow-error-500/30',
+      info: 'bg-info-500 text-white shadow-info-500/30',
+      outline: 'border-2 border-neutral-400 text-neutral-800 dark:border-neutral-600 dark:text-neutral-200 hover:border-primary-500 hover:text-primary-600'
     }
     
     const sizes = {
-      sm: 'px-2 py-0.5 text-xs',
-      md: 'px-2.5 py-1 text-sm',
-      lg: 'px-3 py-1.5 text-base'
+      sm: 'px-3 py-1 text-xs',
+      md: 'px-4 py-2 text-sm',
+      lg: 'px-5 py-2.5 text-base'
     }
 
     return (

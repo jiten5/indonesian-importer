@@ -10,7 +10,8 @@ export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElemen
 
 const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ className, label, error, helperText, options, id, required, ...props }, ref) => {
-    const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`
+    const generatedId = React.useId()
+    const selectId = id || `select-${generatedId}`
     
     return (
       <div className="w-full">
@@ -26,11 +27,12 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             'w-full px-4 py-3 border rounded-lg transition-all duration-200',
             'focus:outline-none focus:ring-2 focus:ring-offset-0',
             'disabled:opacity-50 disabled:cursor-not-allowed',
-            'dark:bg-neutral-900 dark:text-neutral-100',
+            'bg-white dark:bg-neutral-800',
+            'text-neutral-900 dark:text-neutral-100',
             'appearance-none bg-no-repeat bg-right pr-10',
             error
               ? 'border-error-500 focus:ring-error-500 focus:border-error-500'
-              : 'border-neutral-300 dark:border-neutral-700 focus:ring-primary-500 focus:border-primary-500',
+              : 'border-neutral-300 dark:border-neutral-600 focus:ring-primary-500 focus:border-primary-500',
             className
           )}
           ref={ref}

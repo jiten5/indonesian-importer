@@ -78,7 +78,7 @@ const Navbar: React.FC<NavbarProps> = ({
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+          <div className="hidden lg:flex items-center gap-6 lg:gap-8">
             {navigation.map((item) => (
               <div
                 key={item.label}

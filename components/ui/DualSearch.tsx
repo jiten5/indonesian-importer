@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import Select from './Select';
 import Button from './Button';
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 
 interface DualSearchProps {
   className?: string;
@@ -28,7 +28,7 @@ export function DualSearch({ className, onSearch }: DualSearchProps) {
 
   return (
     <div className={cn('w-full', className)}>
-      <div className="flex flex-col lg:flex-row gap-3 bg-white dark:bg-neutral-800 rounded-lg shadow-lg p-3">
+      <div className="flex flex-col lg:flex-row gap-3 p-2">
         {/* Search Type Dropdown */}
         <div className="w-full lg:w-48">
           <Select
