@@ -45,7 +45,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           onChange={e => {
             if (isMulti) {
               const selected = Array.from(e.target.selectedOptions).map(opt => opt.value);
-              onChange && onChange({ target: { value: selected } });
+              onChange && onChange({ target: { value: selected } } as any);
             } else {
               onChange && onChange(e);
             }

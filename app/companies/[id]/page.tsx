@@ -7,7 +7,7 @@ import MainLayout from '@/components/layouts/MainLayout'
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
-import Tabs from '@/components/ui/Tabs'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/Tabs'
 import { 
   Building2, 
   MapPin, 
@@ -40,7 +40,6 @@ import {
   Search
 } from 'lucide-react'
 
-const Highcharts = dynamic(() => import('highcharts'), { ssr: false })
 const HighchartsReact = dynamic(() => import('highcharts-react-official'), { ssr: false })
 
 // Mock company data

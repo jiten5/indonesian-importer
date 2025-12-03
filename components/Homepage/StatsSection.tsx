@@ -16,7 +16,6 @@ const StatsSection: React.FC = () => (
           Comprehensive global trade intelligence powering smarter business decisions worldwide.
         </p>
       </div>
-
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
         <div className="text-center p-8 border-r-0 md:border-r border-neutral-200 dark:border-neutral-700">
