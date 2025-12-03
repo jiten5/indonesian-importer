@@ -776,7 +776,8 @@ export default function IndonesiaImportPage() {
       },
       tooltip: {
         shared: true,
-        formatter: function() {
+        formatter: function(this: any): string {
+          // @ts-ignore - Highcharts formatter context
           const category = topCategories[this.points[0].point.index];
           return `<b>${category.name}</b><br/>` +
                  `HS Code: ${category.hsCode}<br/>` +
@@ -845,7 +846,7 @@ export default function IndonesiaImportPage() {
     },
     tooltip: {
       shared: true,
-      formatter: function() {
+      formatter: function(this: any): string {
         const port = topPorts[this.points[0].point.index];
         return `<b>${port.port}</b><br/>` +
                `2024: $${port.value2024.toLocaleString()}M<br/>` +
@@ -885,7 +886,7 @@ export default function IndonesiaImportPage() {
     },
     tooltip: {
       shared: true,
-      formatter: function() {
+      formatter: function(this: any): string {
         const importer = topImporters[this.points[0].point.index];
         return `<b>${importer.name}</b><br/>` +
                `Industry: ${importer.industry}<br/>` +
@@ -926,7 +927,7 @@ export default function IndonesiaImportPage() {
     },
     tooltip: {
       shared: true,
-      formatter: function() {
+      formatter: function(this: any): string {
         const supplier = topSuppliers[this.points[0].point.index];
         return `<b>${supplier.name}</b><br/>` +
                `Country: ${supplier.flag} ${supplier.country}<br/>` +
@@ -967,7 +968,7 @@ export default function IndonesiaImportPage() {
     },
     tooltip: {
       shared: true,
-      formatter: function() {
+      formatter: function(this: any): string {
         const trend = monthlyTrends[this.points[0].point.index];
         return `<b>${trend.month}</b><br/>` +
                `2024/2025: $${trend.value2024.toLocaleString()}M<br/>` +
@@ -2089,4 +2090,8 @@ export default function IndonesiaImportPage() {
     </MainLayout>
   )
 }
+
+
+
+
 

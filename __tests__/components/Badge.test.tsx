@@ -9,18 +9,18 @@ describe('Badge Component', () => {
 
   it('applies variant classes correctly', () => {
     const { container } = render(<Badge variant="primary">Primary</Badge>)
-    expect(container.firstChild).toHaveClass('bg-primary-100')
+    expect(container.firstChild).toHaveClass('from-primary-500')
   })
 
   it('applies size classes correctly', () => {
     const { container: small } = render(<Badge size="sm">Small</Badge>)
-    expect(small.firstChild).toHaveClass('px-2', 'py-0.5', 'text-xs')
+    expect(small.firstChild).toHaveClass('px-3', 'py-1', 'text-xs')
 
     const { container: medium } = render(<Badge size="md">Medium</Badge>)
-    expect(medium.firstChild).toHaveClass('px-2.5', 'py-1', 'text-sm')
+    expect(medium.firstChild).toHaveClass('px-4', 'py-2', 'text-sm')
 
     const { container: large } = render(<Badge size="lg">Large</Badge>)
-    expect(large.firstChild).toHaveClass('px-3', 'py-1.5', 'text-base')
+    expect(large.firstChild).toHaveClass('px-5', 'py-2.5', 'text-base')
   })
 
   it('renders all variants without errors', () => {

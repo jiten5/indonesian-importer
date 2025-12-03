@@ -776,7 +776,8 @@ export default function IndonesiaExportPage() {
       },
       tooltip: {
         shared: true,
-        formatter: function() {
+        formatter: function(this: any): string {
+          // @ts-ignore - Highcharts formatter context
           const category = topCategories[this.points[0].point.index];
           return `<b>${category.name}</b><br/>` +
                  `HS Code: ${category.hsCode}<br/>` +
@@ -845,7 +846,7 @@ export default function IndonesiaExportPage() {
     },
     tooltip: {
       shared: true,
-      formatter: function() {
+      formatter: function(this: any): string {
         const port = topPorts[this.points[0].point.index];
         return `<b>${port.port}</b><br/>` +
                `2024: $${port.value2024.toLocaleString()}M<br/>` +
@@ -885,7 +886,7 @@ export default function IndonesiaExportPage() {
     },
     tooltip: {
       shared: true,
-      formatter: function() {
+      formatter: function(this: any): string {
         const exporter = topExporters[this.points[0].point.index];
         return `<b>${exporter.name}</b><br/>` +
                `Industry: ${exporter.industry}<br/>` +
@@ -926,7 +927,7 @@ export default function IndonesiaExportPage() {
     },
     tooltip: {
       shared: true,
-      formatter: function() {
+      formatter: function(this: any): string {
         const buyer = topBuyers[this.points[0].point.index];
         return `<b>${buyer.name}</b><br/>` +
                `Country: ${buyer.flag} ${buyer.country}<br/>` +
@@ -967,7 +968,7 @@ export default function IndonesiaExportPage() {
     },
     tooltip: {
       shared: true,
-      formatter: function() {
+      formatter: function(this: any): string {
         const trend = monthlyTrends[this.points[0].point.index];
         return `<b>${trend.month}</b><br/>` +
                `2024/2025: $${trend.value2024.toLocaleString()}M<br/>` +
@@ -1539,10 +1540,10 @@ export default function IndonesiaExportPage() {
                       {item.product}
                     </td>
                     <td className="p-4 text-sm text-neutral-600 dark:text-neutral-400">
-                      {item.importer}
+                      {item.exporter}
                     </td>
                     <td className="p-4 text-sm text-neutral-600 dark:text-neutral-400">
-                      {item.origin}
+                      {item.destination}
                     </td>
                     <td className="p-4 font-semibold text-neutral-900 dark:text-white">
                       ${item.value.toLocaleString()}
@@ -2088,4 +2089,8 @@ export default function IndonesiaExportPage() {
     </MainLayout>
   )
 }
+
+
+
+
 
