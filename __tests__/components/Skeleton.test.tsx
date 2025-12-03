@@ -47,3 +47,4 @@ describe('Skeleton Component', () => {
     expect(skeleton).toHaveClass('custom-skeleton')
   })
 })
+

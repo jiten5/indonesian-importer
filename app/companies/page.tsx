@@ -175,7 +175,7 @@ export default function CompaniesPage() {
             <Badge variant="primary" size="lg" className="mb-6">
               Company Directory
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-white mb-6">
               Indonesia Trade Companies Database
             </h1>
             <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
@@ -404,3 +404,4 @@ export default function CompaniesPage() {
     </div>
   )
 }
+

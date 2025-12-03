@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PageLayout from '@/components/layouts/PageLayout';
+// import Breadcrumb from '@/components/ui/Breadcrumb';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 
@@ -10,6 +11,7 @@ export default function PrivacyPolicyPage() {
     <PageLayout>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
+          {/* <Breadcrumb items={[{ label: 'Privacy Policy', href: '/privacy' }]} /> */}
           <Badge variant="primary" className="mb-4">
             Legal
           </Badge>
@@ -149,3 +151,4 @@ export default function PrivacyPolicyPage() {
     </PageLayout>
   );
 }
+

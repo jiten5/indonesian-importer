@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({
   tagline = 'Empowering global trade decisions with real-time data intelligence',
   sections,
   socialLinks = [],
-  showNewsletter = true,
+  showNewsletter = false,
   className
 }) => {
   const socialIcons = {
@@ -111,28 +111,7 @@ const Footer: React.FC<FooterProps> = ({
             </div>
           ))}
 
-          {/* Newsletter Section */}
-          {showNewsletter && (
-            <div className="lg:col-span-4">
-              <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 mb-4">
-                Stay Updated
-              </h3>
-              <p className="text-neutral-600 dark:text-neutral-400 mb-4">
-                Subscribe to our newsletter for the latest trade insights and platform updates.
-              </p>
-              <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  leftIcon={<Mail className="w-4 h-4" />}
-                  required
-                />
-                <Button variant="primary" size="md" className="w-full">
-                  Subscribe
-                </Button>
-              </form>
-            </div>
-          )}
+          {/* ...existing code... */}
         </div>
 
         {/* Bottom Bar */}
@@ -167,3 +146,4 @@ const Footer: React.FC<FooterProps> = ({
 }
 
 export default Footer
+

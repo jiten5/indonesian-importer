@@ -10,7 +10,7 @@ interface PageLayoutProps {
 }
 
 const defaultNavigation = [
-  { label: 'Home', href: '/' },
+  // { label: 'Home', href: '/' },
   { 
     label: 'Products', 
     href: '/products',
@@ -57,8 +57,9 @@ export default function PageLayout({ children, hero }: PageLayoutProps) {
     <div className="flex min-h-screen flex-col">
       <Navbar navigation={defaultNavigation} />
       {hero && <div className="hero-section">{hero}</div>}
-      <main className="flex-1 container-custom py-12 lg:py-16">{children}</main>
+      <main className="flex-1 container-custom pt-20 py-12 lg:py-16">{children}</main>
       <Footer sections={defaultFooterSections} />
     </div>
   )
 }
+

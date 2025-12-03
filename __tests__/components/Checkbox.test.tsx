@@ -58,3 +58,4 @@ describe('Checkbox Component', () => {
     expect(checkbox).toHaveClass('custom-class')
   })
 })
+

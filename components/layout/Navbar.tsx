@@ -104,46 +104,114 @@ const Navbar: React.FC<NavbarProps> = ({
 
                 {/* Mega Menu Dropdown */}
                 {item.items && activeDropdown === item.label && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-auto min-w-[280px] max-w-md bg-white dark:bg-neutral-800 rounded-xl shadow-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden animate-fade-in">
-                    <div className="p-2">
-                      {item.items.map((subItem, idx) => (
-                        <Link
-                          key={subItem.label}
-                          href={subItem.href}
-                          className={cn(
-                            "group/item flex items-start gap-3 px-4 py-3 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-all duration-200",
-                            subItem.featured && "bg-gradient-to-r from-primary-50/50 to-secondary-50/50 dark:from-primary-900/20 dark:to-secondary-900/20 border border-primary-200 dark:border-primary-800"
-                          )}
-                          style={{ animationDelay: `${idx * 50}ms` }}
-                        >
-                          {subItem.icon && (
-                            <div className={cn(
-                              "flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 group-hover/item:scale-110",
-                              subItem.featured 
-                                ? "bg-gradient-to-br from-primary-500 to-secondary-500 text-white" 
-                                : "bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 group-hover/item:bg-primary-100 dark:group-hover/item:bg-primary-900/30 group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400"
-                            )}>
-                              {subItem.icon}
-                            </div>
-                          )}
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
-                              <span className="font-semibold text-neutral-900 dark:text-white group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400 transition-colors">
-                                {subItem.label}
-                              </span>
-                              {subItem.featured && (
-                                <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300">New</span>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-auto bg-white dark:bg-neutral-800 rounded-xl shadow-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden animate-fade-in">
+                    {item.label === 'Products' ? (
+                      // Single column layout for Products
+                      <div className="p-3 flex flex-col gap-1" style={{ minWidth: '280px' }}>
+                        {item.items.map((subItem, idx) => (
+                          <Link
+                            key={subItem.label}
+                            href={subItem.href}
+                            className={cn(
+                              "group/item flex items-start gap-3 px-3 py-3 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-all duration-200",
+                              subItem.featured && "bg-gradient-to-r from-primary-50/50 to-secondary-50/50 dark:from-primary-900/20 dark:to-secondary-900/20 border border-primary-200 dark:border-primary-800"
+                            )}
+                            style={{ animationDelay: `${idx * 50}ms` }}
+                          >
+                            {subItem.icon && (
+                              <div className={cn(
+                                "flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 group-hover/item:scale-110",
+                                subItem.featured 
+                                  ? "bg-gradient-to-br from-primary-500 to-secondary-500 text-white" 
+                                  : "bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 group-hover/item:bg-primary-100 dark:group-hover/item:bg-primary-900/30 group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400"
+                              )}>
+                                {subItem.icon}
+                              </div>
+                            )}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="font-semibold text-sm text-neutral-900 dark:text-white group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400 transition-colors whitespace-nowrap">
+                                  {subItem.label}
+                                </span>
+                                {subItem.featured && (
+                                  <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300">New</span>
+                                )}
+                              </div>
+                              {subItem.description && (
+                                <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 line-clamp-2">
+                                  {subItem.description}
+                                </p>
                               )}
                             </div>
-                            {subItem.description && (
-                              <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 line-clamp-2">
-                                {subItem.description}
-                              </p>
-                            )}
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
+                          </Link>
+                        ))}
+                      </div>
+                    ) : (
+                      // Multi-column layout for other dropdowns (Solutions)
+                      <div className="p-4 grid grid-cols-3 gap-6" style={{ minWidth: '900px' }}>
+                        {(() => {
+                          const groups: any[][] = []
+                          let currentGroup: any[] = []
+                          
+                          item.items.forEach((subItem) => {
+                            if (subItem.label === '---') {
+                              if (currentGroup.length > 0) {
+                                groups.push(currentGroup)
+                                currentGroup = []
+                              }
+                            } else {
+                              currentGroup.push(subItem)
+                            }
+                          })
+                          
+                          if (currentGroup.length > 0) {
+                            groups.push(currentGroup)
+                          }
+                          
+                          return groups.map((group, groupIdx) => (
+                            <div key={groupIdx} className="flex flex-col gap-2 min-w-[280px]">
+                              {group.map((subItem, idx) => (
+                                <Link
+                                  key={subItem.label}
+                                  href={subItem.href}
+                                  className={cn(
+                                    "group/item flex items-start gap-3 px-3 py-3 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-all duration-200",
+                                    subItem.featured && "bg-gradient-to-r from-primary-50/50 to-secondary-50/50 dark:from-primary-900/20 dark:to-secondary-900/20 border border-primary-200 dark:border-primary-800"
+                                  )}
+                                  style={{ animationDelay: `${(groupIdx * 3 + idx) * 50}ms` }}
+                                >
+                                  {subItem.icon && (
+                                    <div className={cn(
+                                      "flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 group-hover/item:scale-110",
+                                      subItem.featured 
+                                        ? "bg-gradient-to-br from-primary-500 to-secondary-500 text-white" 
+                                        : "bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 group-hover/item:bg-primary-100 dark:group-hover/item:bg-primary-900/30 group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400"
+                                    )}>
+                                      {subItem.icon}
+                                    </div>
+                                  )}
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-2">
+                                      <span className="font-semibold text-sm text-neutral-900 dark:text-white group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400 transition-colors whitespace-nowrap">
+                                        {subItem.label}
+                                      </span>
+                                      {subItem.featured && (
+                                        <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300">New</span>
+                                      )}
+                                    </div>
+                                    {subItem.description && (
+                                      <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 line-clamp-2">
+                                        {subItem.description}
+                                      </p>
+                                    )}
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          ))
+                        })()}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -299,3 +367,4 @@ const Navbar: React.FC<NavbarProps> = ({
 }
 
 export default Navbar
+

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PageLayout from '@/components/layouts/PageLayout';
+// import Breadcrumb from '@/components/ui/Breadcrumb';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 
@@ -9,6 +10,7 @@ export default function TermsPage() {
   return (
     <PageLayout>
       <div className="max-w-4xl mx-auto">
+        {/* <Breadcrumb items={[{ label: 'Terms of Service', href: '/terms' }]} /> */}
         <div className="text-center mb-12">
           <Badge variant="primary" className="mb-4">
             Legal
@@ -158,3 +160,4 @@ export default function TermsPage() {
     </PageLayout>
   );
 }
+

@@ -184,3 +184,4 @@ const FeatureAccordion: React.FC<FeatureAccordionProps> = ({
 }
 
 export default FeatureAccordion
+

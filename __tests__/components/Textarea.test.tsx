@@ -77,3 +77,4 @@ describe('Textarea Component', () => {
     expect(textarea).toHaveAttribute('rows', '5')
   })
 })
+

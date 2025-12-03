@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import PageLayout from '@/components/layouts/PageLayout';
+import MainLayout from '@/components/layouts/MainLayout';
+// import Breadcrumb from '@/components/ui/Breadcrumb';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
@@ -76,8 +77,9 @@ export default function CompanyListingPage() {
   const paginatedCompanies = filteredCompanies.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <PageLayout>
-      <div className="mb-12">
+    <MainLayout>
+      <div className="pt-20 mb-12">
+        {/* <Breadcrumb items={[{ label: 'Companies Listing', href: '/companies-listing' }]} /> */}
         <div className="text-center mb-10">
           <Badge variant="primary" className="mb-3">
             Company Database
@@ -288,6 +290,7 @@ export default function CompanyListingPage() {
           </div>
         )}
       </div>
-    </PageLayout>
+    </MainLayout>
   );
 }
+

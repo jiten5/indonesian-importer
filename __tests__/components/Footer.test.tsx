@@ -60,3 +60,4 @@ describe('Footer Component', () => {
     expect(screen.getByText('Company')).toBeInTheDocument()
   })
 })
+

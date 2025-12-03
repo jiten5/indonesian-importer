@@ -60,7 +60,7 @@ export default function AboutPage() {
   return (
     <PageLayout>
       <motion.div
-        className="text-center max-w-4xl mx-auto mb-20"
+        className="text-center max-w-4xl mx-auto mb-20 pt-24"
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
@@ -68,11 +68,11 @@ export default function AboutPage() {
         <Badge variant="primary" className="mb-4">
           About Us
         </Badge>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-neutral-50 mb-6">
-          Empowering Global Trade with Data Intelligence
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+          How We Help Businesses Like Yours Win Globally
         </h1>
         <p className="text-xl text-neutral-600 dark:text-neutral-400">
-          We're on a mission to make global trade transparent, accessible, and efficient for businesses worldwide
+          Discover how businesses leverage Market Inside to expand globally, manage risks, and grow with actionable trade data.
         </p>
       </motion.div>
 
@@ -83,65 +83,45 @@ export default function AboutPage() {
               <Target className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 mb-3">
-                Our Mission
-              </h2>
+              <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 mb-3">Our Mission</h2>
               <p className="text-neutral-700 dark:text-neutral-300">
-                To democratize access to global trade intelligence, empowering businesses of all sizes
-                to make informed decisions, identify opportunities, and compete effectively in the
-                international marketplace.
+                To democratize access to global trade intelligence, empowering businesses of all sizes to make informed decisions, identify opportunities, and compete effectively in the international marketplace.
               </p>
             </div>
           </div>
         </Card>
-
         <Card padding="lg" className="bg-gradient-to-br from-secondary-50 to-secondary-100 dark:from-secondary-900/20 dark:to-secondary-900/30 border-secondary-200 dark:border-secondary-800">
           <div className="flex items-start gap-4">
             <div className="p-3 bg-secondary-600 dark:bg-secondary-700 rounded-lg">
               <Eye className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 mb-3">
-                Our Vision
-              </h2>
+              <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 mb-3">Our Vision</h2>
               <p className="text-neutral-700 dark:text-neutral-300">
-                To become the world's most trusted and comprehensive trade intelligence platform,
-                enabling seamless global commerce and fostering economic growth across borders and
-                industries.
+                To become the world's most trusted and comprehensive trade intelligence platform, enabling seamless global commerce and fostering economic growth across borders and industries.
               </p>
             </div>
           </div>
         </Card>
       </div>
 
-      <div className="mb-20">
-        <h2 className="text-3xl font-bold text-neutral-900 dark:text-neutral-50 mb-8 text-center">
-          Our Story
-        </h2>
-        <div className="max-w-4xl mx-auto space-y-6 text-lg text-neutral-700 dark:text-neutral-300">
-          <p>
-            Founded in 2015, our journey began with a simple observation: businesses were making
-            critical international trade decisions with incomplete information. Import and export data
-            was scattered, expensive, and difficult to analyze.
-          </p>
-          <p>
-            Our founders, experienced professionals in international trade and technology, envisioned
-            a platform that would aggregate, standardize, and deliver trade intelligence in real-time.
-            What started as a small team working from a garage has grown into a global company serving
-            over 10,000 businesses across 195 countries.
-          </p>
-          <p>
-            Today, we process over 50 million trade records, provide insights on billions of dollars
-            in global trade, and help our customers identify opportunities, mitigate risks, and grow
-            their international business. Our commitment to innovation, data quality, and customer
-            success remains unwavering.
-          </p>
-          <p>
-            As we look to the future, we're excited to continue expanding our coverage, enhancing our
-            AI capabilities, and building new tools that empower businesses to thrive in an
-            increasingly complex global marketplace.
-          </p>
-        </div>
+      <div className="prose prose-lg dark:prose-invert max-w-3xl mx-auto mb-20">
+        <p className="lead">
+          Founded in 2018, Market Inside Data was born from a simple observation: businesses needed
+          better access to trade intelligence to compete globally, but the available solutions were
+          either too expensive, too complex, or too limited in scope.
+        </p>
+        <p>
+          Today, we process over 50 million trade records, provide insights on billions of dollars
+          in global trade, and help our customers identify opportunities, mitigate risks, and grow
+          their international business. Our commitment to innovation, data quality, and customer
+          success remains unwavering.
+        </p>
+        <p>
+          As we look to the future, we're excited to continue expanding our coverage, enhancing our
+          AI capabilities, and building new tools that empower businesses to thrive in an
+          increasingly complex global marketplace.
+        </p>
       </div>
 
       <div className="mb-20">
@@ -276,3 +256,5 @@ export default function AboutPage() {
     </PageLayout>
   );
 }
+
+

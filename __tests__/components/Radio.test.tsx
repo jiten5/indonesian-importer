@@ -55,3 +55,4 @@ describe('Radio Component', () => {
     expect(radio).toHaveClass('custom-radio')
   })
 })
+

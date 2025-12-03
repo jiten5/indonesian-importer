@@ -74,3 +74,4 @@ describe('Card Component', () => {
     expect(screen.getByText('Footer')).toBeInTheDocument()
   })
 })
+

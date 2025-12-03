@@ -77,16 +77,16 @@ export default function ContactPage() {
   return (
     <PageLayout>
       <motion.div
-        className="text-center max-w-3xl mx-auto mb-16"
+        className="text-center max-w-3xl mx-auto mb-16 pt-24"
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
       >
         <Badge variant="primary" className="mb-4">
-          Contact Us
+            Heading: Contact Us
         </Badge>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-neutral-50 mb-6">
-          Get in Touch
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+            Subheading: Reach out to discover how Market Inside can help your business expand globally, manage risks, and grow with actionable trade data.
         </h1>
         <p className="text-lg text-neutral-600 dark:text-neutral-400">
           Have a question or want to learn more? We're here to help. Our team typically responds
@@ -333,3 +333,4 @@ export default function ContactPage() {
     </PageLayout>
   );
 }
+

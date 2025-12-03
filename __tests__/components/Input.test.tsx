@@ -80,3 +80,4 @@ describe('Input Component', () => {
     expect(passwordInput).toHaveAttribute('type', 'password')
   })
 })
+

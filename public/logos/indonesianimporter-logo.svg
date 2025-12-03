@@ -3,7 +3,8 @@
   <title>ExportGenius - Reference SVG</title>
   <desc>Reference SVG embedding the uploaded raster logo. Source image: /mnt/data/320@132.png</desc>
   <!-- Embedded raster logo as referenced image (keeps original look, useful as a reference or for tracing) -->
-  <image href="/mnt/data/320@132.png" x="0" y="0" width="320" height="132" preserveAspectRatio="xMidYMid meet" />
-  <!-- Optional: a thin border to show the SVG canvas -->
-  <rect x="0.5" y="0.5" width="319" height="131" fill="none" stroke="#000000" stroke-opacity="0.05" stroke-width="1"/>
+<svg width="320" height="80" viewBox="0 0 320 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="80" rx="16" fill="#6366F1"/>
+  <text x="160" y="48" text-anchor="middle" font-family="Inter, Cal Sans, Arial, Helvetica, sans-serif" font-size="36" fill="#fff" font-weight="bold" letter-spacing="2">IndonesianImporter</text>
+</svg>
 </svg>

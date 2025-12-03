@@ -51,3 +51,4 @@ describe('Badge Component', () => {
     expect(screen.getByText('With Icon')).toBeInTheDocument()
   })
 })
+

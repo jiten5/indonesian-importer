@@ -32,3 +32,4 @@ describe('ThemeToggle Component', () => {
     expect(button).toBeInTheDocument()
   })
 })
+

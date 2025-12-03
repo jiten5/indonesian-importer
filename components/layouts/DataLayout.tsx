@@ -15,7 +15,7 @@ interface DataLayoutProps {
 }
 
 const defaultNavigation = [
-  { label: 'Home', href: '/' },
+  // { label: 'Home', href: '/' },
   { 
     label: 'Products', 
     href: '/products',
@@ -114,3 +114,4 @@ export default function DataLayout({ children, sidebar, title }: DataLayoutProps
     </div>
   )
 }
+

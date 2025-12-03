@@ -2,86 +2,12 @@
 
 import { Metadata } from 'next'
 import { motion } from 'framer-motion'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
+import MainLayout from '@/components/layouts/MainLayout'
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations'
 import { CheckCircle, X, ArrowRight, HelpCircle } from 'lucide-react'
-
-// Note: Metadata export removed due to 'use client' directive
-// export const metadata: Metadata = {
-//   title: 'Pricing Plans - Trade Data Intelligence Platform',
-//   description: 'Flexible pricing plans for businesses of all sizes. From startups to enterprise, find the perfect plan for your trade intelligence needs.',
-//   keywords: 'pricing, trade data pricing, subscription plans, enterprise pricing, trade intelligence cost',
-//   openGraph: {
-//     title: 'Pricing Plans - Trade Data Intelligence Platform',
-//     description: 'Flexible pricing plans starting from $99/month. Enterprise solutions available.',
-//     type: 'website',
-//     url: 'https://tradeintelligence.com/pricing'
-//   }
-// }
-
-const navigation = [
-  {
-    label: 'Platform',
-    href: '/platform',
-    items: [
-      { label: 'Data Intelligence', href: '/platform/data-intelligence' },
-      { label: 'Analytics', href: '/platform/analytics' },
-      { label: 'Integrations', href: '/platform/integrations' },
-      { label: 'API', href: '/platform/api' }
-    ]
-  },
-  {
-    label: 'Solutions',
-    href: '/solutions',
-    items: [
-      { label: 'Import/Export', href: '/solutions/import-export' },
-      { label: 'Market Research', href: '/solutions/market-research' },
-      { label: 'Compliance', href: '/solutions/compliance' }
-    ]
-  },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Resources', href: '/resources' },
-  { label: 'About', href: '/about' }
-]
-
-const footerSections = [
-  {
-    title: 'Platform',
-    links: [
-      { label: 'Data Intelligence', href: '/platform/data-intelligence' },
-      { label: 'Analytics', href: '/platform/analytics' },
-      { label: 'API Documentation', href: '/platform/api' }
-    ]
-  },
-  {
-    title: 'Solutions',
-    links: [
-      { label: 'Import/Export', href: '/solutions/import-export' },
-      { label: 'Market Research', href: '/solutions/market-research' },
-      { label: 'Enterprise', href: '/solutions/enterprise' }
-    ]
-  },
-  {
-    title: 'Resources',
-    links: [
-      { label: 'Documentation', href: '/docs' },
-      { label: 'Blog', href: '/blog' },
-      { label: 'Support', href: '/support' }
-    ]
-  },
-  {
-    title: 'Company',
-    links: [
-      { label: 'About Us', href: '/about' },
-      { label: 'Contact', href: '/contact' },
-      { label: 'Partners', href: '/partners' }
-    ]
-  }
-]
 
 interface PricingPlan {
   name: string
@@ -213,8 +139,7 @@ const faqs = [
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
-      <Navbar navigation={navigation} />
+    <MainLayout>
 
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 pt-32 pb-20 lg:pt-40 lg:pb-32">
@@ -225,18 +150,18 @@ export default function PricingPage() {
             animate="visible"
             variants={staggerContainer}
           >
-            <motion.h1 
-              variants={staggerItem}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-white mb-6"
-            >
-              Simple, Transparent Pricing
-            </motion.h1>
-            <motion.p 
-              variants={staggerItem}
-              className="text-xl text-neutral-600 dark:text-neutral-300 mb-8"
-            >
-              Choose the perfect plan for your business. No hidden fees, cancel anytime.
-            </motion.p>
+              <motion.h1 
+                variants={staggerItem}
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-white mb-6"
+              >
+                Discover Next-Gen Trade & Risk Intelligence Solutions
+              </motion.h1>
+              <motion.p 
+                variants={staggerItem}
+                className="text-lg text-neutral-600 dark:text-neutral-400"
+              >
+                Flexible pricing plans for smarter trade and risk intelligence. Find the perfect plan for your business needs.
+              </motion.p>
             <motion.div variants={staggerItem}>
               <Badge variant="success" size="lg">
                 14-Day Free Trial • No Credit Card Required
@@ -483,15 +408,7 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
-
-      <Footer
-        sections={footerSections}
-        socialLinks={[
-          { platform: 'linkedin', href: 'https://linkedin.com' },
-          { platform: 'twitter', href: 'https://twitter.com' },
-          { platform: 'github', href: 'https://github.com' }
-        ]}
-      />
-    </div>
+    </MainLayout>
   )
 }
+

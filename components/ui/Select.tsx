@@ -6,10 +6,11 @@ export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElemen
   error?: string
   helperText?: string
   options: { value: string; label: string }[]
+  isMulti?: boolean
 }
 
 const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
-  ({ className, label, error, helperText, options, id, required, ...props }, ref) => {
+  ({ className, label, error, helperText, options, id, required, isMulti, value, onChange, ...props }, ref) => {
     const generatedId = React.useId()
     const selectId = id || `select-${generatedId}`
     
@@ -23,6 +24,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         )}
         <select
           id={selectId}
+          multiple={isMulti}
           className={cn(
             'w-full px-4 py-3 border rounded-lg transition-all duration-200',
             'focus:outline-none focus:ring-2 focus:ring-offset-0',
@@ -39,6 +41,15 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           aria-invalid={error ? 'true' : 'false'}
           aria-describedby={error ? `${selectId}-error` : helperText ? `${selectId}-helper` : undefined}
           aria-required={required}
+          value={isMulti ? (Array.isArray(value) ? value : []) : value}
+          onChange={e => {
+            if (isMulti) {
+              const selected = Array.from(e.target.selectedOptions).map(opt => opt.value);
+              onChange && onChange({ target: { value: selected } });
+            } else {
+              onChange && onChange(e);
+            }
+          }}
           {...props}
         >
           {options.map((option) => (
@@ -61,3 +72,4 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 Select.displayName = 'Select'
 
 export default Select
+

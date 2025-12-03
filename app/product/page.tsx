@@ -4,6 +4,7 @@ import { Metadata } from 'next'
 import { motion } from 'framer-motion'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+// import Breadcrumb from '@/components/ui/Breadcrumb';
 import Card, { CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
@@ -226,9 +227,10 @@ export default function ProductPage() {
                 Enterprise-Grade Platform
               </Badge>
             </motion.div>
+            {/* <Breadcrumb items={[{ label: 'Product', href: '/product' }]} /> */}
             <motion.h1 
               variants={staggerItem}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-white mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-white mb-6"
             >
               The Most Comprehensive Trade Data Intelligence Platform
             </motion.h1>
@@ -462,3 +464,4 @@ export default function ProductPage() {
     </div>
   )
 }
+

@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+// import Breadcrumb from '@/components/ui/Breadcrumb';
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
@@ -245,6 +246,9 @@ export default function APIPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-900">
       <Navbar navigation={navigation} />
+      <div className="container-custom pt-24">
+        {/* <Breadcrumb items={[{ label: 'Platform', href: '/platform' }, { label: 'API', href: '/platform/api' }]} /> */}
+      </div>
 
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 pt-32 pb-20 lg:pt-40 lg:pb-32">
@@ -253,7 +257,7 @@ export default function APIPage() {
             <Badge variant="primary" size="lg" className="mb-6">
               RESTful API
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-white mb-6">
               Trade Data API Documentation
             </h1>
             <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8 max-w-3xl mx-auto">
@@ -531,3 +535,4 @@ export default function APIPage() {
     </div>
   )
 }
+

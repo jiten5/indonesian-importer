@@ -287,3 +287,4 @@ export default function DataGrid<T extends Record<string, any>>({
     </div>
   );
 }
+

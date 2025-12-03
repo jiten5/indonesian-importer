@@ -71,3 +71,4 @@ describe('Select Component', () => {
     expect(select).toHaveClass('custom-select')
   })
 })
+

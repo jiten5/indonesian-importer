@@ -78,11 +78,11 @@ const pricingHighlights = [
 export default function DataPlatformPage() {
   return (
     <PageLayout>
-      <div className="text-center max-w-4xl mx-auto mb-16">
+      <div className="text-center max-w-4xl mx-auto mb-16 pt-24">
         <Badge variant="primary" className="mb-4">
           Data Platform
         </Badge>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-neutral-50 mb-6">
           Our Leading Global Trade Intelligence Platform
         </h1>
         <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8">
@@ -272,3 +272,4 @@ export default function DataPlatformPage() {
     </PageLayout>
   );
 }
+

@@ -1,9 +1,11 @@
+
 'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import PageLayout from '@/components/layouts/PageLayout';
+import MainLayout from '@/components/layouts/MainLayout';
+// import Breadcrumb from '@/components/ui/Breadcrumb';
 import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations';
 import { FeatureCard } from '@/components/ui/FeatureCard';
 import Badge from '@/components/ui/Badge';
@@ -51,10 +53,10 @@ export default function SolutionsPage() {
     : solutions;
 
   return (
-    <PageLayout>
+    <MainLayout>
       {/* Hero Section */}
       <motion.div
-        className="text-center max-w-3xl mx-auto mb-16"
+        className="text-center max-w-3xl mx-auto mb-16 pt-24"
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
@@ -62,12 +64,16 @@ export default function SolutionsPage() {
         <Badge variant="secondary" className="mb-4">
           Solutions
         </Badge>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-neutral-50 mb-6">
-          How We Help Businesses Like Yours Win Globally
-        </h1>
+        {/* <Breadcrumb items={[{ label: 'Solutions', href: '/solutions' }]} /> */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+            Heading: Solutions Sections
+          </h1>
         <p className="text-lg text-neutral-600 dark:text-neutral-400">
           Comprehensive trade intelligence solutions tailored to your industry and business needs
         </p>
+          <p className="text-lg text-neutral-600 dark:text-neutral-400">
+            Subheading: Discover how businesses leverage Market Inside to expand globally, manage risks, and grow with actionable trade data.
+          </p>
       </motion.div>
 
       {/* Industry Filter */}
@@ -270,6 +276,7 @@ export default function SolutionsPage() {
           </Link>
         </div>
       </motion.div>
-    </PageLayout>
+    </MainLayout>
   );
 }
+

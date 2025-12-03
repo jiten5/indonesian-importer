@@ -48,3 +48,4 @@ describe('AnimatedCounter Component', () => {
     expect(span).toHaveClass('custom-counter')
   })
 })
+

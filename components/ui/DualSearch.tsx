@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
@@ -16,6 +16,12 @@ export function DualSearch({ className, onSearch }: DualSearchProps) {
   const [searchBy, setSearchBy] = useState('product');
   const [query, setQuery] = useState('');
 
+  // Dynamic placeholder based on searchBy
+  let inputPlaceholder = 'Enter your search term...';
+  if (searchBy === 'product') inputPlaceholder = 'Enter product description...';
+  else if (searchBy === 'hsCode') inputPlaceholder = 'Enter HS Code...';
+  else if (searchBy === 'company') inputPlaceholder = 'Enter company name...';
+
   const handleSearch = () => {
     onSearch?.(searchType, searchBy, query);
   };
@@ -28,9 +34,13 @@ export function DualSearch({ className, onSearch }: DualSearchProps) {
 
   return (
     <div className={cn('w-full', className)}>
-      <div className="flex flex-col lg:flex-row gap-3 p-2">
+      <form
+        className="flex flex-col lg:flex-row gap-3 p-2"
+        onSubmit={e => { e.preventDefault(); handleSearch(); }}
+        autoComplete="off"
+      >
         {/* Search Type Dropdown */}
-        <div className="w-full lg:w-48">
+        <div className="w-full lg:w-48 flex items-center">
           <Select
             options={[
               { label: 'Imports', value: 'imports' },
@@ -38,11 +48,12 @@ export function DualSearch({ className, onSearch }: DualSearchProps) {
             ]}
             value={searchType}
             onChange={(e) => setSearchType(e.target.value)}
+            className="h-12 w-full"
           />
         </div>
 
         {/* Search By Dropdown */}
-        <div className="w-full lg:w-56">
+        <div className="w-full lg:w-56 flex items-center">
           <Select
             options={[
               { label: 'Product Description', value: 'product' },
@@ -51,19 +62,20 @@ export function DualSearch({ className, onSearch }: DualSearchProps) {
             ]}
             value={searchBy}
             onChange={(e) => setSearchBy(e.target.value)}
+            className="h-12 w-full"
           />
         </div>
 
         {/* Search Input */}
-        <div className="flex-1 relative">
+        <div className="flex-1 flex items-center">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Enter your search term..."
+            placeholder={inputPlaceholder}
             className={cn(
-              'w-full h-full px-4 py-3 rounded-md',
+              'w-full h-12 px-4 rounded-md',
               'bg-neutral-50 dark:bg-neutral-700',
               'border border-neutral-300 dark:border-neutral-600',
               'text-neutral-900 dark:text-neutral-50',
@@ -75,16 +87,19 @@ export function DualSearch({ className, onSearch }: DualSearchProps) {
         </div>
 
         {/* Search Button */}
-        <Button
-          variant="primary"
-          size="lg"
-          onClick={handleSearch}
-          className="w-full lg:w-auto flex items-center justify-center gap-2 whitespace-nowrap"
-        >
-          <Search className="w-5 h-5" />
-          Search
-        </Button>
-      </div>
+        <div className="flex items-center">
+          <Button
+            variant="primary"
+            size="lg"
+            type="submit"
+            className="h-12 px-6 flex items-center justify-center gap-2 whitespace-nowrap"
+          >
+            <Search className="w-5 h-5" />
+            Search
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }
+

@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import PageLayout from '@/components/layouts/PageLayout';
+// import Breadcrumb from '@/components/ui/Breadcrumb';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
@@ -166,16 +167,16 @@ export default function ProductsPage() {
   return (
     <PageLayout>
       {/* Hero Section */}
-      <div className="text-center max-w-3xl mx-auto mb-16">
+      <div className="text-center max-w-3xl mx-auto mb-16 pt-24">
         <Badge variant="primary" className="mb-4">
           Products
         </Badge>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-neutral-50 mb-6">
+        {/* <Breadcrumb items={[{ label: 'Products', href: '/products' }]} /> */}
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-neutral-50 mb-6">
           Discover Next-Gen Trade & Risk Intelligence Solutions
         </h1>
         <p className="text-lg text-neutral-600 dark:text-neutral-400">
-          Whether you need a web platform, API access, or raw data licensing, we have the perfect
-          solution for your trade intelligence needs.
+          Smarter trade and risk intelligence products, packed with new features to help you navigate markets and manage risks with ease.
         </p>
       </div>
 
@@ -369,3 +370,4 @@ export default function ProductsPage() {
     </PageLayout>
   );
 }
+

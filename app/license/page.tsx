@@ -4,6 +4,7 @@ import { Metadata } from 'next'
 import { motion } from 'framer-motion'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+// import Breadcrumb from '@/components/ui/Breadcrumb';
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
@@ -239,6 +240,9 @@ export default function LicensePage() {
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-900">
       <Navbar navigation={navigation} />
+      <div className="container-custom pt-20">
+        {/* <Breadcrumb items={[{ label: 'License', href: '/license' }]} /> */}
+      </div>
 
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-accent-50 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 pt-32 pb-20 lg:pt-40">
@@ -247,7 +251,7 @@ export default function LicensePage() {
             <Badge variant="primary" size="lg" className="mb-6">
               Data Licensing
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-white mb-6">
               Flexible Data Access with Full Legal Compliance
             </h1>
             <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
@@ -495,3 +499,4 @@ export default function LicensePage() {
     </div>
   )
 }
+

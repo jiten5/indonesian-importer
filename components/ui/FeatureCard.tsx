@@ -41,3 +41,4 @@ export function FeatureCard({ icon: Icon, title, description, className }: Featu
     </div>
   );
 }
+
