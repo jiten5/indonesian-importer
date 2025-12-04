@@ -5,4 +5,4 @@ Disallow: /_next/
 Disallow: /admin/
 
 # Sitemap
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://indonesian-importer.vercel.app/sitemap.xml

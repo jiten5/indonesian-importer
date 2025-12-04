@@ -308,9 +308,9 @@ export default function ComponentsPage() {
             </h2>
             <Card padding="lg">
               <div className="space-y-4">
-                <h1 className="text-5xl font-bold text-gradient">
-                  Heading 1 with Gradient
-                </h1>
+                <div className="text-5xl font-bold text-gradient">
+                  Heading 1 with Gradient (Demo)
+                </div>
                 <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">
                   Heading 2
                 </h2>
