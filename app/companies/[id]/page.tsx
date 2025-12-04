@@ -79,7 +79,7 @@ const companyData = {
     suppliersCount: 45,
     buyersCount: 18
   },
-  description: 'PT Glory Global Solutions Indonesia is a premier import-export company specializing in industrial equipment, machinery, and technological solutions. With over 14 years of experience in international trade, we serve as a vital bridge connecting Indonesian industries with global suppliers and markets. Our commitment to excellence and quality has made us a trusted partner for businesses across manufacturing, construction, and technology sectors.',
+  description: 'Premier import-export company specializing in industrial equipment, machinery, and technological solutions. Over 14 years connecting Indonesian industries with global markets.',
   certifications: [
     { name: 'ISO 9001:2015', icon: CheckCircle, issueDate: '2022' },
     { name: 'Customs AEO Certified', icon: Shield, issueDate: '2021' },
@@ -258,12 +258,18 @@ const topPartners = [
 
 export default function CompanyProfilePage() {
   const params = useParams()
-  const [activeTab, setActiveTab] = useState<'overview' | 'imports' | 'exports' | 'supply-chain' | 'analytics'>('overview')
+  const [activeTab, setActiveTab] = useState<'overview' | 'turnover' | 'countries' | 'commodities' | 'supply-chain' | 'ports' | 'competitors' | 'shipments' | 'contacts' | 'faq' | 'reviews'>('overview')
   const [viewMode, setViewMode] = useState<'chart' | 'table'>('chart')
+  const [turnoverSubTab, setTurnoverSubTab] = useState<'import' | 'export'>('import')
+  const [countriesSubTab, setCountriesSubTab] = useState<'import' | 'export'>('import')
+  const [commoditiesSubTab, setCommoditiesSubTab] = useState<'import' | 'export'>('import')
+  const [supplyChainSubTab, setSupplyChainSubTab] = useState<'suppliers' | 'buyers'>('suppliers')
+  const [portsSubTab, setPortsSubTab] = useState<'import' | 'export'>('import')
+  const [competitorsSubTab, setCompetitorsSubTab] = useState<'import' | 'export'>('import')
+  const [shipmentsSubTab, setShipmentsSubTab] = useState<'import' | 'export'>('import')
 
   return (
     <MainLayout>
-
       {/* Company Header */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 pt-32 pb-12 pt-24">
         <div className="container-custom relative z-10">
@@ -441,24 +447,34 @@ export default function CompanyProfilePage() {
               Overview
             </button>
             <button
-              onClick={() => setActiveTab('imports')}
+              onClick={() => setActiveTab('turnover')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
-                activeTab === 'imports'
+                activeTab === 'turnover'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
                   : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
-              Import Data
+              Turnover
             </button>
             <button
-              onClick={() => setActiveTab('exports')}
+              onClick={() => setActiveTab('countries')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
-                activeTab === 'exports'
+                activeTab === 'countries'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
                   : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
-              Export Data
+              Countries
+            </button>
+            <button
+              onClick={() => setActiveTab('commodities')}
+              className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
+                activeTab === 'commodities'
+                  ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
+                  : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+              }`}
+            >
+              Commodities
             </button>
             <button
               onClick={() => setActiveTab('supply-chain')}
@@ -471,14 +487,64 @@ export default function CompanyProfilePage() {
               Supply Chain
             </button>
             <button
-              onClick={() => setActiveTab('analytics')}
+              onClick={() => setActiveTab('ports')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
-                activeTab === 'analytics'
+                activeTab === 'ports'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
                   : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
-              Analytics & Competitors
+              Ports
+            </button>
+            <button
+              onClick={() => setActiveTab('competitors')}
+              className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
+                activeTab === 'competitors'
+                  ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
+                  : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+              }`}
+            >
+              Competitors
+            </button>
+            <button
+              onClick={() => setActiveTab('shipments')}
+              className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
+                activeTab === 'shipments'
+                  ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
+                  : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+              }`}
+            >
+              Shipments
+            </button>
+            <button
+              onClick={() => setActiveTab('contacts')}
+              className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
+                activeTab === 'contacts'
+                  ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
+                  : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+              }`}
+            >
+              Contacts
+            </button>
+            <button
+              onClick={() => setActiveTab('faq')}
+              className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
+                activeTab === 'faq'
+                  ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
+                  : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+              }`}
+            >
+              FAQs
+            </button>
+            <button
+              onClick={() => setActiveTab('reviews')}
+              className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
+                activeTab === 'reviews'
+                  ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
+                  : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+              }`}
+            >
+              Reviews & Ratings
             </button>
           </div>
         </div>
@@ -620,79 +686,239 @@ export default function CompanyProfilePage() {
             </div>
           )}
 
-          {/* Import Data Tab */}
-          {activeTab === 'imports' && (
-            <div className="space-y-8">
-              {/* Import Turnover Chart */}
-              <Card padding="lg">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                    Import Turnover Trends (Last 12 Months)
-                  </h3>
-                  <Badge variant="primary" size="md">
-                    {companyData.stats.totalImportShipments} Shipments
-                  </Badge>
-                </div>
-                <div className="h-80 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4">
-                  <div className="text-center pt-24">
-                    <BarChart3 className="w-16 h-16 text-primary-400 mx-auto mb-4" />
-                    <p className="text-neutral-600 dark:text-neutral-400">
-                      Monthly import turnover visualization
-                    </p>
+          {/* Turnover Tab */}
+          {activeTab === 'turnover' && (
+            <div className="space-y-6">
+              {/* Sub-tabs for Import/Export */}
+              <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
+                <button
+                  onClick={() => setTurnoverSubTab('import')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    turnoverSubTab === 'import'
+                      ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Import Turnover
+                </button>
+                <button
+                  onClick={() => setTurnoverSubTab('export')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    turnoverSubTab === 'export'
+                      ? 'border-secondary-600 text-secondary-600 dark:border-secondary-400 dark:text-secondary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Export Turnover
+                </button>
+              </div>
+
+              {/* Import Turnover Content */}
+              {turnoverSubTab === 'import' && (
+                <Card padding="lg">
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">
+                      Import Turnover Trends (Last 12 Months)
+                    </h3>
+                    <Badge variant="primary" size="md">
+                      {companyData.stats.totalImportShipments} Shipments
+                    </Badge>
                   </div>
-                </div>
-              </Card>
+                  <div className="h-80 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4">
+                    <div className="text-center pt-24">
+                      <BarChart3 className="w-16 h-16 text-primary-400 mx-auto mb-4" />
+                      <p className="text-neutral-600 dark:text-neutral-400">
+                        Monthly import turnover visualization
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              )}
 
-              {/* Top Import Countries */}
-              <Card padding="lg">
-                <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-                  Top Import Source Countries
-                </h3>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b-2 border-neutral-200 dark:border-neutral-800">
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Rank</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Country</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Shipments</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Value</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Market Share</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Growth</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {topImportCountries.map((country) => (
-                        <tr key={country.country} className="border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/30">
-                          <td className="p-4 text-neutral-900 dark:text-white font-medium">{topImportCountries.indexOf(country) + 1}</td>
-                          <td className="p-4">
-                            <div className="flex items-center space-x-3">
-                              <span className="text-2xl">{country.flag}</span>
-                              <span className="font-medium text-neutral-900 dark:text-white">{country.country}</span>
-                            </div>
-                          </td>
-                          <td className="p-4 text-neutral-900 dark:text-white">{country.shipments}</td>
-                          <td className="p-4 font-semibold text-success-600 dark:text-success-400">{country.value}</td>
-                          <td className="p-4 text-neutral-600 dark:text-neutral-400">{country.share}%</td>
-                          <td className="p-4">
-                            <div className="flex items-center space-x-2">
-                              {country.trend === 'up' ? (
-                                <TrendingUp className="w-5 h-5 text-success-600 dark:text-success-400" />
-                              ) : (
-                                <TrendingDown className="w-5 h-5 text-error-600 dark:text-error-400" />
-                              )}
-                              <span className={country.growth > 0 ? 'text-success-600 dark:text-success-400' : 'text-error-600 dark:text-error-400'}>
-                                {country.growth > 0 ? '+' : ''}{country.growth}%
-                              </span>
-                            </div>
-                          </td>
+              {/* Export Turnover Content */}
+              {turnoverSubTab === 'export' && (
+                <Card padding="lg">
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">
+                      Export Turnover Trends (Last 12 Months)
+                    </h3>
+                    <Badge variant="secondary" size="md">
+                      {companyData.stats.totalExportShipments} Shipments
+                    </Badge>
+                  </div>
+                  <div className="h-80 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4">
+                    <div className="text-center pt-24">
+                      <BarChart3 className="w-16 h-16 text-secondary-400 mx-auto mb-4" />
+                      <p className="text-neutral-600 dark:text-neutral-400">
+                        Monthly export turnover visualization
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              )}
+            </div>
+          )}
+
+          {/* Countries Tab */}
+          {activeTab === 'countries' && (
+            <div className="space-y-6">
+              {/* Sub-tabs for Import/Export */}
+              <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
+                <button
+                  onClick={() => setCountriesSubTab('import')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    countriesSubTab === 'import'
+                      ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Country Import From
+                </button>
+                <button
+                  onClick={() => setCountriesSubTab('export')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    countriesSubTab === 'export'
+                      ? 'border-secondary-600 text-secondary-600 dark:border-secondary-400 dark:text-secondary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Country Export To
+                </button>
+              </div>
+
+              {/* Import Countries Content */}
+              {countriesSubTab === 'import' && (
+                <Card padding="lg">
+                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+                    Top Import Source Countries
+                  </h3>
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="border-b-2 border-neutral-200 dark:border-neutral-800">
+                          <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Rank</th>
+                          <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Country</th>
+                          <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Shipments</th>
+                          <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Value</th>
+                          <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Market Share</th>
+                          <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Growth</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </Card>
+                      </thead>
+                      <tbody>
+                        {topImportCountries.map((country) => (
+                          <tr key={country.country} className="border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/30">
+                            <td className="p-4 text-neutral-900 dark:text-white font-medium">{topImportCountries.indexOf(country) + 1}</td>
+                            <td className="p-4">
+                              <div className="flex items-center space-x-3">
+                                <span className="text-2xl">{country.flag}</span>
+                                <span className="font-medium text-neutral-900 dark:text-white">{country.country}</span>
+                              </div>
+                            </td>
+                            <td className="p-4 text-neutral-900 dark:text-white">{country.shipments}</td>
+                            <td className="p-4 font-semibold text-success-600 dark:text-success-400">{country.value}</td>
+                            <td className="p-4 text-neutral-600 dark:text-neutral-400">{country.share}%</td>
+                            <td className="p-4">
+                              <div className="flex items-center space-x-2">
+                                {country.trend === 'up' ? (
+                                  <TrendingUp className="w-5 h-5 text-success-600 dark:text-success-400" />
+                                ) : (
+                                  <TrendingDown className="w-5 h-5 text-error-600 dark:text-error-400" />
+                                )}
+                                <span className={country.growth > 0 ? 'text-success-600 dark:text-success-400' : 'text-error-600 dark:text-error-400'}>
+                                  {country.growth > 0 ? '+' : ''}{country.growth}%
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </Card>
+              )}
 
-              {/* Top Import Products */}
+              {/* Export Countries Content */}
+              {countriesSubTab === 'export' && (
+                <Card padding="lg">
+                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+                    Top Export Destination Countries
+                  </h3>
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="border-b-2 border-neutral-200 dark:border-neutral-800">
+                          <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Rank</th>
+                          <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Country</th>
+                          <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Shipments</th>
+                          <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Value</th>
+                          <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Market Share</th>
+                          <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Growth</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {topExportCountries.map((country) => (
+                          <tr key={country.country} className="border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/30">
+                            <td className="p-4 text-neutral-900 dark:text-white font-medium">{topExportCountries.indexOf(country) + 1}</td>
+                            <td className="p-4">
+                              <div className="flex items-center space-x-3">
+                                <span className="text-2xl">{country.flag}</span>
+                                <span className="font-medium text-neutral-900 dark:text-white">{country.country}</span>
+                              </div>
+                            </td>
+                            <td className="p-4 text-neutral-900 dark:text-white">{country.shipments}</td>
+                            <td className="p-4 font-semibold text-success-600 dark:text-success-400">{country.value}</td>
+                            <td className="p-4 text-neutral-600 dark:text-neutral-400">{country.share}%</td>
+                            <td className="p-4">
+                              <div className="flex items-center space-x-2">
+                                {country.trend === 'up' ? (
+                                  <TrendingUp className="w-5 h-5 text-success-600 dark:text-success-400" />
+                                ) : (
+                                  <TrendingDown className="w-5 h-5 text-error-600 dark:text-error-400" />
+                                )}
+                                <span className={country.growth > 0 ? 'text-success-600 dark:text-success-400' : 'text-error-600 dark:text-error-400'}>
+                                  {country.growth > 0 ? '+' : ''}{country.growth}%
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </Card>
+              )}
+            </div>
+          )}
+
+          {/* Commodities Tab */}
+          {activeTab === 'commodities' && (
+            <div className="space-y-6">
+              {/* Sub-tabs for Import/Export */}
+              <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
+                <button
+                  onClick={() => setCommoditiesSubTab('import')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    commoditiesSubTab === 'import'
+                      ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Import Commodities
+                </button>
+                <button
+                  onClick={() => setCommoditiesSubTab('export')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    commoditiesSubTab === 'export'
+                      ? 'border-secondary-600 text-secondary-600 dark:border-secondary-400 dark:text-secondary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Export Commodities
+                </button>
+              </div>
+
+              {/* Import Commodities Content */}
+              {commoditiesSubTab === 'import' && (
               <Card padding="lg">
                 <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
                   Top Import Products by HSN Code
@@ -739,151 +965,10 @@ export default function CompanyProfilePage() {
                   </table>
                 </div>
               </Card>
+              )}
 
-              {/* Major Import Ports */}
-              <Card padding="lg">
-                <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-                  <Anchor className="w-6 h-6 inline mr-2" />
-                  Major Ports of Entry
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {majorImportPorts.map((port) => (
-                    <div key={port.port} className="p-6 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <div className="text-sm text-neutral-600 dark:text-neutral-400 mb-1">#{port.rank}</div>
-                          <h4 className="text-lg font-bold text-neutral-900 dark:text-white">{port.port}</h4>
-                        </div>
-                        <Badge variant="primary" size="sm">{port.share}%</Badge>
-                      </div>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <div className="text-sm text-neutral-600 dark:text-neutral-400">Shipments</div>
-                          <div className="text-xl font-bold text-neutral-900 dark:text-white">{port.shipments}</div>
-                        </div>
-                        <div>
-                          <div className="text-sm text-neutral-600 dark:text-neutral-400">Value</div>
-                          <div className="text-xl font-bold text-success-600 dark:text-success-400">{port.value}</div>
-                        </div>
-                      </div>
-                      <div className="mt-4 pt-4 border-t dark:border-neutral-700">
-                        <div className="text-sm text-neutral-600 dark:text-neutral-400">Container Volume: <span className="font-semibold text-neutral-900 dark:text-white">{port.containers}</span></div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Card>
-
-              {/* Recent Import Shipments */}
-              <Card padding="lg">
-                <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-                  Recent Import Shipments
-                </h3>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b-2 border-neutral-200 dark:border-neutral-800">
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Date</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Product</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">HSN</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Origin</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Supplier</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Port</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Value</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {recentShipments.filter(s => s.type === 'Import').map((shipment) => (
-                        <tr key={shipment.id} className="border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/30">
-                          <td className="p-4 text-sm text-neutral-600 dark:text-neutral-400">{shipment.date}</td>
-                          <td className="p-4 text-neutral-900 dark:text-white">{shipment.product}</td>
-                          <td className="p-4"><Badge variant="outline" size="sm">{shipment.hsCode}</Badge></td>
-                          <td className="p-4 text-neutral-600 dark:text-neutral-400">{shipment.origin}</td>
-                          <td className="p-4 text-sm text-neutral-600 dark:text-neutral-400">{shipment.supplier}</td>
-                          <td className="p-4 text-sm text-neutral-600 dark:text-neutral-400">{shipment.port}</td>
-                          <td className="p-4 font-semibold text-success-600 dark:text-success-400">{shipment.value}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </Card>
-            </div>
-          )}
-
-          {/* Export Data Tab */}
-          {activeTab === 'exports' && (
-            <div className="space-y-8">
-              {/* Export Turnover Chart */}
-              <Card padding="lg">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                    Export Turnover Trends (Last 12 Months)
-                  </h3>
-                  <Badge variant="secondary" size="md">
-                    {companyData.stats.totalExportShipments} Shipments
-                  </Badge>
-                </div>
-                <div className="h-80 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4">
-                  <div className="text-center pt-24">
-                    <BarChart3 className="w-16 h-16 text-secondary-400 mx-auto mb-4" />
-                    <p className="text-neutral-600 dark:text-neutral-400">
-                      Monthly export turnover visualization
-                    </p>
-                  </div>
-                </div>
-              </Card>
-
-              {/* Top Export Countries */}
-              <Card padding="lg">
-                <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-                  Top Export Destination Countries
-                </h3>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b-2 border-neutral-200 dark:border-neutral-800">
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Rank</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Country</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Shipments</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Value</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Market Share</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Growth</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {topExportCountries.map((country) => (
-                        <tr key={country.country} className="border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/30">
-                          <td className="p-4 text-neutral-900 dark:text-white font-medium">{topExportCountries.indexOf(country) + 1}</td>
-                          <td className="p-4">
-                            <div className="flex items-center space-x-3">
-                              <span className="text-2xl">{country.flag}</span>
-                              <span className="font-medium text-neutral-900 dark:text-white">{country.country}</span>
-                            </div>
-                          </td>
-                          <td className="p-4 text-neutral-900 dark:text-white">{country.shipments}</td>
-                          <td className="p-4 font-semibold text-success-600 dark:text-success-400">{country.value}</td>
-                          <td className="p-4 text-neutral-600 dark:text-neutral-400">{country.share}%</td>
-                          <td className="p-4">
-                            <div className="flex items-center space-x-2">
-                              {country.trend === 'up' ? (
-                                <TrendingUp className="w-5 h-5 text-success-600 dark:text-success-400" />
-                              ) : (
-                                <TrendingDown className="w-5 h-5 text-error-600 dark:text-error-400" />
-                              )}
-                              <span className={country.growth > 0 ? 'text-success-600 dark:text-success-400' : 'text-error-600 dark:text-error-400'}>
-                                {country.growth > 0 ? '+' : ''}{country.growth}%
-                              </span>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </Card>
-
-              {/* Top Export Products */}
+              {/* Export Commodities Content */}
+              {commoditiesSubTab === 'export' && (
               <Card padding="lg">
                 <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
                   Top Export Products by HSN Code
@@ -928,12 +1013,79 @@ export default function CompanyProfilePage() {
                   </table>
                 </div>
               </Card>
+              )}
+            </div>
+          )}
 
-              {/* Major Export Ports */}
+          {/* Ports Tab */}
+          {activeTab === 'ports' && (
+            <div className="space-y-6">
+              {/* Sub-tabs for Import/Export */}
+              <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
+                <button
+                  onClick={() => setPortsSubTab('import')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    portsSubTab === 'import'
+                      ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Port of Unloading
+                </button>
+                <button
+                  onClick={() => setPortsSubTab('export')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    portsSubTab === 'export'
+                      ? 'border-secondary-600 text-secondary-600 dark:border-secondary-400 dark:text-secondary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Port of Loading
+                </button>
+              </div>
+
+              {/* Import Ports Content */}
+              {portsSubTab === 'import' && (
               <Card padding="lg">
                 <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
                   <Anchor className="w-6 h-6 inline mr-2" />
-                  Major Ports of Exit
+                  Major Import Ports of Entry
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {majorImportPorts.map((port) => (
+                    <div key={port.port} className="p-6 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <div className="text-sm text-neutral-600 dark:text-neutral-400 mb-1">#{port.rank}</div>
+                          <h4 className="text-lg font-bold text-neutral-900 dark:text-white">{port.port}</h4>
+                        </div>
+                        <Badge variant="primary" size="sm">{port.share}%</Badge>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <div className="text-sm text-neutral-600 dark:text-neutral-400">Shipments</div>
+                          <div className="text-xl font-bold text-neutral-900 dark:text-white">{port.shipments}</div>
+                        </div>
+                        <div>
+                          <div className="text-sm text-neutral-600 dark:text-neutral-400">Value</div>
+                          <div className="text-xl font-bold text-success-600 dark:text-success-400">{port.value}</div>
+                        </div>
+                      </div>
+                      <div className="mt-4 pt-4 border-t dark:border-neutral-700">
+                        <div className="text-sm text-neutral-600 dark:text-neutral-400">Container Volume: <span className="font-semibold text-neutral-900 dark:text-white">{port.containers}</span></div>
+                      </div>
+                    </div>
+                  ))}        
+                </div>
+              </Card>
+              )}
+
+              {/* Export Ports Content */}
+              {portsSubTab === 'export' && (
+              <Card padding="lg">
+                <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+                  <Anchor className="w-6 h-6 inline mr-2" />
+                  Major Export Ports of Exit
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {majorExportPorts.map((port) => (
@@ -962,8 +1114,76 @@ export default function CompanyProfilePage() {
                   ))}
                 </div>
               </Card>
+              )}
+            </div>
+          )}
 
-              {/* Recent Export Shipments */}
+          {/* Shipments Tab */}
+          {activeTab === 'shipments' && (
+            <div className="space-y-6">
+              {/* Sub-tabs for Import/Export */}
+              <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
+                <button
+                  onClick={() => setShipmentsSubTab('import')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    shipmentsSubTab === 'import'
+                      ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Import Shipments
+                </button>
+                <button
+                  onClick={() => setShipmentsSubTab('export')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    shipmentsSubTab === 'export'
+                      ? 'border-secondary-600 text-secondary-600 dark:border-secondary-400 dark:text-secondary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Export Shipments
+                </button>
+              </div>
+
+              {/* Import Shipments Content */}
+              {shipmentsSubTab === 'import' && (
+              <Card padding="lg">
+                <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+                  Recent Import Shipments
+                </h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b-2 border-neutral-200 dark:border-neutral-800">
+                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Date</th>
+                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Product</th>
+                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">HSN</th>
+                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Origin</th>
+                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Supplier</th>
+                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Port</th>
+                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {recentShipments.filter(s => s.type === 'Import').map((shipment) => (
+                        <tr key={shipment.id} className="border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/30">
+                          <td className="p-4 text-sm text-neutral-600 dark:text-neutral-400">{shipment.date}</td>
+                          <td className="p-4 text-neutral-900 dark:text-white">{shipment.product}</td>
+                          <td className="p-4"><Badge variant="outline" size="sm">{shipment.hsCode}</Badge></td>
+                          <td className="p-4 text-neutral-600 dark:text-neutral-400">{shipment.origin}</td>
+                          <td className="p-4 text-sm text-neutral-600 dark:text-neutral-400">{shipment.supplier}</td>
+                          <td className="p-4 text-sm text-neutral-600 dark:text-neutral-400">{shipment.port}</td>
+                          <td className="p-4 font-semibold text-success-600 dark:text-success-400">{shipment.value}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </Card>
+              )}
+
+              {/* Export Shipments Content */}
+              {shipmentsSubTab === 'export' && (
               <Card padding="lg">
                 <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
                   Recent Export Shipments
@@ -997,13 +1217,39 @@ export default function CompanyProfilePage() {
                   </table>
                 </div>
               </Card>
+              )}
             </div>
           )}
 
           {/* Supply Chain Tab */}
           {activeTab === 'supply-chain' && (
-            <div className="space-y-8">
-              {/* Top Suppliers */}
+            <div className="space-y-6">
+              {/* Sub-tabs for Suppliers/Buyers */}
+              <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
+                <button
+                  onClick={() => setSupplyChainSubTab('suppliers')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    supplyChainSubTab === 'suppliers'
+                      ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Suppliers
+                </button>
+                <button
+                  onClick={() => setSupplyChainSubTab('buyers')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    supplyChainSubTab === 'buyers'
+                      ? 'border-secondary-600 text-secondary-600 dark:border-secondary-400 dark:text-secondary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
+                  Buyers
+                </button>
+              </div>
+
+              {/* Suppliers Content */}
+              {supplyChainSubTab === 'suppliers' && (
               <Card padding="lg">
                 <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
                   <Network className="w-6 h-6 inline mr-2" />
@@ -1043,8 +1289,10 @@ export default function CompanyProfilePage() {
                   </table>
                 </div>
               </Card>
+              )}
 
-              {/* Top Buyers */}
+              {/* Buyers Content */}
+              {supplyChainSubTab === 'buyers' && (
               <Card padding="lg">
                 <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
                   <Users className="w-6 h-6 inline mr-2" />
@@ -1084,7 +1332,12 @@ export default function CompanyProfilePage() {
                   </table>
                 </div>
               </Card>
+              )}\n            </div>
+          )}
 
+          {/* Contacts Tab */}
+          {activeTab === 'contacts' && (
+            <div className="space-y-8">
               {/* Key Decision Makers */}
               <Card padding="lg">
                 <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
@@ -1173,142 +1426,523 @@ export default function CompanyProfilePage() {
             </div>
           )}
 
-          {/* Analytics & Competitors Tab */}
-          {activeTab === 'analytics' && (
-            <div className="space-y-8">
-              {/* Import Competitors */}
-              <Card padding="lg">
-                <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-                  <Shield className="w-6 h-6 inline mr-2" />
+          {/* Competitors Tab */}
+          {activeTab === 'competitors' && (
+            <div className="space-y-6">
+              {/* Sub-tabs for Import/Export */}
+              <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
+                <button
+                  onClick={() => setCompetitorsSubTab('import')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    competitorsSubTab === 'import'
+                      ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
                   Import Competitors
-                </h3>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b-2 border-neutral-200 dark:border-neutral-800">
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Rank</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Company Name</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Shipments</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Total Value</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Market Share</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">YoY Growth</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {importCompetitors.map((competitor) => (
-                        <tr key={competitor.name} className="border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/30">
-                          <td className="p-4 text-neutral-900 dark:text-white font-medium">{competitor.rank}</td>
-                          <td className="p-4 font-semibold text-neutral-900 dark:text-white">{competitor.name}</td>
-                          <td className="p-4 text-neutral-600 dark:text-neutral-400">{competitor.shipments.toLocaleString()}</td>
-                          <td className="p-4 font-semibold text-success-600 dark:text-success-400">{competitor.value}</td>
-                          <td className="p-4 text-neutral-600 dark:text-neutral-400">{competitor.marketShare}%</td>
-                          <td className="p-4">
-                            <span className="text-success-600 dark:text-success-400">+{competitor.growth}%</span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </Card>
-
-              {/* Export Competitors */}
-              <Card padding="lg">
-                <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-                  <Shield className="w-6 h-6 inline mr-2" />
+                </button>
+                <button
+                  onClick={() => setCompetitorsSubTab('export')}
+                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
+                    competitorsSubTab === 'export'
+                      ? 'border-secondary-600 text-secondary-600 dark:border-secondary-400 dark:text-secondary-400'
+                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
+                >
                   Export Competitors
-                </h3>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b-2 border-neutral-200 dark:border-neutral-800">
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Rank</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Company Name</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Shipments</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Total Value</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Market Share</th>
-                        <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">YoY Growth</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {exportCompetitors.map((competitor) => (
-                        <tr key={competitor.name} className="border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/30">
-                          <td className="p-4 text-neutral-900 dark:text-white font-medium">{competitor.rank}</td>
-                          <td className="p-4 font-semibold text-neutral-900 dark:text-white">{competitor.name}</td>
-                          <td className="p-4 text-neutral-600 dark:text-neutral-400">{competitor.shipments.toLocaleString()}</td>
-                          <td className="p-4 font-semibold text-success-600 dark:text-success-400">{competitor.value}</td>
-                          <td className="p-4 text-neutral-600 dark:text-neutral-400">{competitor.marketShare}%</td>
-                          <td className="p-4">
-                            <span className="text-success-600 dark:text-success-400">+{competitor.growth}%</span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                </button>
+              </div>
+
+              {/* Import Competitors Content */}
+              {competitorsSubTab === 'import' && (
+                <div className="space-y-8">
+                  <Card padding="lg">
+                    <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+                      <Shield className="w-6 h-6 inline mr-2" />
+                      Import Competitors
+                    </h3>
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead>
+                          <tr className="border-b-2 border-neutral-200 dark:border-neutral-800">
+                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Rank</th>
+                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Company Name</th>
+                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Shipments</th>
+                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Total Value</th>
+                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Market Share</th>
+                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">YoY Growth</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {importCompetitors.map((competitor) => (
+                            <tr key={competitor.name} className="border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/30">
+                              <td className="p-4 text-neutral-900 dark:text-white font-medium">{competitor.rank}</td>
+                              <td className="p-4 font-semibold text-neutral-900 dark:text-white">{competitor.name}</td>
+                              <td className="p-4 text-neutral-600 dark:text-neutral-400">{competitor.shipments.toLocaleString()}</td>
+                              <td className="p-4 font-semibold text-success-600 dark:text-success-400">{competitor.value}</td>
+                              <td className="p-4 text-neutral-600 dark:text-neutral-400">{competitor.marketShare}%</td>
+                              <td className="p-4">
+                                <span className="text-success-600 dark:text-success-400">+{competitor.growth}%</span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </Card>
+
+                  <Card padding="lg">
+                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
+                      Import Volume Trend
+                    </h3>
+                    <div className="h-64 flex items-center justify-center bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+                      <div className="text-center">
+                        <BarChart3 className="w-16 h-16 text-primary-400 mx-auto mb-4" />
+                        <p className="text-neutral-600 dark:text-neutral-400">
+                          Import trend chart visualization
+                        </p>
+                      </div>
+                    </div>
+                  </Card>
+
+                  <Card padding="lg">
+                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
+                      Import Geographic Distribution
+                    </h3>
+                    <div className="h-96 flex items-center justify-center bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+                      <div className="text-center">
+                        <Globe className="w-16 h-16 text-primary-400 mx-auto mb-4" />
+                        <p className="text-neutral-600 dark:text-neutral-400">
+                          Interactive map showing import competitor distribution
+                        </p>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+              )}
+
+              {/* Export Competitors Content */}
+              {competitorsSubTab === 'export' && (
+                <div className="space-y-8">
+                  <Card padding="lg">
+                    <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+                      <Shield className="w-6 h-6 inline mr-2" />
+                      Export Competitors
+                    </h3>
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead>
+                          <tr className="border-b-2 border-neutral-200 dark:border-neutral-800">
+                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Rank</th>
+                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Company Name</th>
+                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Shipments</th>
+                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Total Value</th>
+                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Market Share</th>
+                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">YoY Growth</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {exportCompetitors.map((competitor) => (
+                            <tr key={competitor.name} className="border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/30">
+                              <td className="p-4 text-neutral-900 dark:text-white font-medium">{competitor.rank}</td>
+                              <td className="p-4 font-semibold text-neutral-900 dark:text-white">{competitor.name}</td>
+                              <td className="p-4 text-neutral-600 dark:text-neutral-400">{competitor.shipments.toLocaleString()}</td>
+                              <td className="p-4 font-semibold text-success-600 dark:text-success-400">{competitor.value}</td>
+                              <td className="p-4 text-neutral-600 dark:text-neutral-400">{competitor.marketShare}%</td>
+                              <td className="p-4">
+                                <span className="text-success-600 dark:text-success-400">+{competitor.growth}%</span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </Card>
+
+                  <Card padding="lg">
+                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
+                      Export Volume Trend
+                    </h3>
+                    <div className="h-64 flex items-center justify-center bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+                      <div className="text-center">
+                        <BarChart3 className="w-16 h-16 text-secondary-400 mx-auto mb-4" />
+                        <p className="text-neutral-600 dark:text-neutral-400">
+                          Export trend chart visualization
+                        </p>
+                      </div>
+                    </div>
+                  </Card>
+
+                  <Card padding="lg">
+                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
+                      Export Geographic Distribution
+                    </h3>
+                    <div className="h-96 flex items-center justify-center bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+                      <div className="text-center">
+                        <Globe className="w-16 h-16 text-secondary-400 mx-auto mb-4" />
+                        <p className="text-neutral-600 dark:text-neutral-400">
+                          Interactive map showing export competitor distribution
+                        </p>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* FAQ Tab */}
+          {activeTab === 'faq' && (
+            <div className="space-y-8">
+              <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-12">
+                  <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+                    Frequently Asked Questions
+                  </h2>
+                  <p className="text-lg text-neutral-600 dark:text-neutral-400">
+                    Common questions about {companyData.name}
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  {/* FAQ Item 1 */}
+                  <details className="group bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700">
+                    <summary className="flex justify-between items-center cursor-pointer p-6 font-semibold text-lg text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                      <span>What products does {companyData.name} specialize in?</span>
+                      <svg className="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+                    <div className="px-6 pb-6 text-neutral-700 dark:text-neutral-300">
+                      <p className="leading-relaxed mb-3">
+                        {companyData.name} specializes in {companyData.industry}, focusing on the following product categories:
+                      </p>
+                      <ul className="list-disc pl-6 space-y-1">
+                        {companyData.lineOfBusiness.map((business, idx) => (
+                          <li key={idx}>{business}</li>
+                        ))}
+                      </ul>
+                      <p className="mt-3">
+                        With {companyData.stats.activeProducts} active product lines and {companyData.stats.tradingPartners} trading partners worldwide, 
+                        we maintain a diverse portfolio to serve various industrial sectors.
+                      </p>
+                    </div>
+                  </details>
+
+                  {/* FAQ Item 2 */}
+                  <details className="group bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700">
+                    <summary className="flex justify-between items-center cursor-pointer p-6 font-semibold text-lg text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                      <span>What are the company's main import and export markets?</span>
+                      <svg className="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+                    <div className="px-6 pb-6 text-neutral-700 dark:text-neutral-300">
+                      <p className="leading-relaxed mb-3">
+                        Our primary trading markets include:
+                      </p>
+                      <div className="mb-3">
+                        <strong className="block mb-2">Import Markets:</strong>
+                        <ul className="list-disc pl-6 space-y-1">
+                          <li>China - Industrial machinery and electronic equipment</li>
+                          <li>Germany - Precision engineering and automation systems</li>
+                          <li>Japan - High-tech components and robotics</li>
+                          <li>USA - Advanced technology solutions</li>
+                          <li>South Korea - Electronic components and semiconductors</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <strong className="block mb-2">Export Markets:</strong>
+                        <ul className="list-disc pl-6 space-y-1">
+                          <li>Singapore - Manufacturing components</li>
+                          <li>Malaysia - Industrial supplies</li>
+                          <li>Thailand - Automotive parts</li>
+                          <li>Vietnam - Assembly components</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </details>
+
+                  {/* FAQ Item 3 */}
+                  <details className="group bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700">
+                    <summary className="flex justify-between items-center cursor-pointer p-6 font-semibold text-lg text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                      <span>How can I become a supplier or customer?</span>
+                      <svg className="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+                    <div className="px-6 pb-6 text-neutral-700 dark:text-neutral-300">
+                      <p className="leading-relaxed mb-3">
+                        We welcome new business partnerships. To become a supplier or customer:
+                      </p>
+                      <ul className="list-disc pl-6 space-y-2 mb-3">
+                        <li><strong>Email:</strong> {companyData.contact.email}</li>
+                        <li><strong>Phone:</strong> {companyData.contact.phone}</li>
+                        <li><strong>Website:</strong> {companyData.contact.website}</li>
+                        <li><strong>LinkedIn:</strong> {companyData.contact.linkedin}</li>
+                      </ul>
+                      <p>
+                        Our procurement and sales teams will evaluate partnership opportunities based on product quality, 
+                        pricing competitiveness, delivery capabilities, and compliance with our quality standards.
+                      </p>
+                    </div>
+                  </details>
+
+                  {/* FAQ Item 4 */}
+                  <details className="group bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700">
+                    <summary className="flex justify-between items-center cursor-pointer p-6 font-semibold text-lg text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                      <span>What certifications and quality standards does the company maintain?</span>
+                      <svg className="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+                    <div className="px-6 pb-6 text-neutral-700 dark:text-neutral-300">
+                      <p className="leading-relaxed mb-3">
+                        {companyData.name} maintains the following certifications and standards:
+                      </p>
+                      <ul className="list-disc pl-6 space-y-1">
+                        {companyData.certifications.map((cert, idx) => (
+                          <li key={idx}><strong>{cert.name}</strong> - Issued {cert.issueDate}</li>
+                        ))}
+                      </ul>
+                      <p className="mt-3">
+                        These certifications demonstrate our commitment to quality, compliance, and sustainable business practices.
+                      </p>
+                    </div>
+                  </details>
+
+                  {/* FAQ Item 5 */}
+                  <details className="group bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700">
+                    <summary className="flex justify-between items-center cursor-pointer p-6 font-semibold text-lg text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                      <span>What is the company's shipment volume and trade value?</span>
+                      <svg className="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+                    <div className="px-6 pb-6 text-neutral-700 dark:text-neutral-300">
+                      <p className="leading-relaxed mb-3">
+                        Our current trade statistics demonstrate significant market presence:
+                      </p>
+                      <ul className="list-disc pl-6 space-y-2">
+                        <li><strong>Import Volume:</strong> {companyData.stats.totalImportShipments} shipments with total value of {companyData.stats.importValue}</li>
+                        <li><strong>Export Volume:</strong> {companyData.stats.totalExportShipments} shipments with total value of {companyData.stats.exportValue}</li>
+                        <li><strong>Average Shipment Value:</strong> {companyData.stats.avgShipmentValue}</li>
+                        <li><strong>Import Ranking:</strong> #{companyData.stats.importRankInIndonesia} in Indonesia</li>
+                        <li><strong>Export Ranking:</strong> #{companyData.stats.exportRankInIndonesia} in Indonesia</li>
+                      </ul>
+                      <p className="mt-3">
+                        We work with {companyData.stats.suppliersCount} suppliers and {companyData.stats.buyersCount} buyers globally.
+                      </p>
+                    </div>
+                  </details>
+
+                  {/* FAQ Item 6 */}
+                  <details className="group bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700">
+                    <summary className="flex justify-between items-center cursor-pointer p-6 font-semibold text-lg text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                      <span>What ports does the company use for imports and exports?</span>
+                      <svg className="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+                    <div className="px-6 pb-6 text-neutral-700 dark:text-neutral-300">
+                      <p className="leading-relaxed mb-3">
+                        We utilize Indonesia's major ports for our import and export operations:
+                      </p>
+                      <div className="mb-3">
+                        <strong className="block mb-2">Primary Ports:</strong>
+                        <ul className="list-disc pl-6 space-y-1">
+                          <li>Tanjung Priok (Jakarta) - 60% of our shipments</li>
+                          <li>Tanjung Perak (Surabaya) - 25% of our shipments</li>
+                          <li>Belawan (Medan) - 11% of our shipments</li>
+                          <li>Soekarno-Hatta Airport - 4% for urgent air cargo</li>
+                        </ul>
+                      </div>
+                      <p>
+                        Our strategic use of multiple ports ensures supply chain resilience and optimized logistics costs.
+                      </p>
+                    </div>
+                  </details>
+
+                  {/* FAQ Item 7 */}
+                  <details className="group bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700">
+                    <summary className="flex justify-between items-center cursor-pointer p-6 font-semibold text-lg text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                      <span>How long has the company been in business?</span>
+                      <svg className="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+                    <div className="px-6 pb-6 text-neutral-700 dark:text-neutral-300">
+                      <p className="leading-relaxed">
+                        {companyData.name} was established in {companyData.established} and has been operating for over 
+                        {new Date().getFullYear() - parseInt(companyData.established)} years. During this time, we have built 
+                        a strong reputation in the {companyData.industry} sector, serving clients across Indonesia and international markets. 
+                        Our company employs {companyData.employees} professionals dedicated to delivering excellence in import-export operations.
+                      </p>
+                    </div>
+                  </details>
+
+                  {/* FAQ Item 8 */}
+                  <details className="group bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700">
+                    <summary className="flex justify-between items-center cursor-pointer p-6 font-semibold text-lg text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                      <span>Where is the company located?</span>
+                      <svg className="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+                    <div className="px-6 pb-6 text-neutral-700 dark:text-neutral-300">
+                      <p className="leading-relaxed mb-3">
+                        Our headquarters is located at:
+                      </p>
+                      <div className="bg-neutral-50 dark:bg-neutral-900 p-4 rounded-lg">
+                        <p className="font-semibold text-neutral-900 dark:text-white mb-2">{companyData.name}</p>
+                        <p>{companyData.address.street}</p>
+                        <p>{companyData.address.city}, {companyData.address.province} {companyData.address.postal}</p>
+                        <p>{companyData.address.country}</p>
+                      </div>
+                      <p className="mt-3">
+                        This strategic location in Jakarta's central business district provides excellent access to major ports, 
+                        government offices, and international business networks.
+                      </p>
+                    </div>
+                  </details>
+                </div>
+
+                {/* FAQ Footer CTA */}
+                <div className="mt-12 text-center p-8 bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700">
+                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3">
+                    Have more questions?
+                  </h3>
+                  <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+                    Contact our team for more information about {companyData.name}
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Button variant="primary" size="md" leftIcon={<Mail className="w-4 h-4" />}>
+                      Email Us
+                    </Button>
+                    <Button variant="outline" size="md" leftIcon={<Phone className="w-4 h-4" />}>
+                      Call {companyData.contact.phone}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Customer Reviews & Ratings Tab */}
+          {activeTab === 'reviews' && (
+            <div className="space-y-8">
+              <Card padding="lg">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <h3 className="text-3xl font-bold text-neutral-900 dark:text-white mb-2">
+                      Customer Reviews & Ratings
+                    </h3>
+                    <p className="text-neutral-600 dark:text-neutral-400">
+                      Trusted by businesses everywhere - from manufacturers and traders to logistics providers and consultants
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <div className="flex items-center justify-end space-x-2 mb-2">
+                      <div className="flex items-center space-x-1">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Star key={star} className={`w-6 h-6 ${star <= Math.round(companyData.rating) ? 'text-warning-500 fill-warning-500' : 'text-neutral-300 dark:text-neutral-600'}`} />
+                        ))}
+                      </div>
+                      <span className="text-2xl font-bold text-neutral-900 dark:text-white">{companyData.rating}</span>
+                    </div>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                      Recommended by {customerReviews.length}+ clients worldwide
+                    </p>
+                  </div>
+                </div>
+
+                {/* Rating Distribution */}
+                <div className="mb-8 p-6 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+                  <h4 className="font-semibold text-neutral-900 dark:text-white mb-4">Rating Distribution</h4>
+                  <div className="space-y-2">
+                    {[5, 4, 3, 2, 1].map((rating) => {
+                      const count = customerReviews.filter(r => r.rating === rating).length
+                      const percentage = (count / customerReviews.length) * 100
+                      return (
+                        <div key={rating} className="flex items-center space-x-3">
+                          <div className="flex items-center space-x-1 w-20">
+                            <span className="text-sm font-medium text-neutral-900 dark:text-white">{rating}</span>
+                            <Star className="w-4 h-4 text-warning-500 fill-warning-500" />
+                          </div>
+                          <div className="flex-1 h-3 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                            <div 
+                              className="h-full bg-warning-500 rounded-full transition-all"
+                              style={{ width: `${percentage}%` }}
+                            />
+                          </div>
+                          <span className="text-sm text-neutral-600 dark:text-neutral-400 w-16 text-right">{count} reviews</span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+
+                {/* Individual Reviews */}
+                <div className="space-y-6">
+                  <h4 className="text-xl font-bold text-neutral-900 dark:text-white">Customer Testimonials</h4>
+                  {customerReviews.map((review) => (
+                    <div key={review.id} className="p-6 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 shadow-sm hover:shadow-md transition-shadow">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex-1">
+                          <div className="flex items-center space-x-3 mb-2">
+                            <h5 className="font-bold text-lg text-neutral-900 dark:text-white">{review.name}</h5>
+                            {review.verified && (
+                              <Badge variant="success" size="sm">
+                                <CheckCircle className="w-3 h-3 mr-1" />
+                                Verified Purchase
+                              </Badge>
+                            )}
+                          </div>
+                          <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-1">{review.company}</p>
+                          <p className="text-sm text-neutral-500 dark:text-neutral-500">{review.date}</p>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <Star key={star} className={`w-5 h-5 ${star <= review.rating ? 'text-warning-500 fill-warning-500' : 'text-neutral-300 dark:text-neutral-600'}`} />
+                          ))}
+                        </div>
+                      </div>
+                      <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                        {review.comment}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Trust Badges */}
+                <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+                  <h4 className="text-xl font-bold text-neutral-900 dark:text-white mb-6 text-center">
+                    Rated 4.7/5 from 2,000+ reviews
+                  </h4>
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+                    <div className="text-center p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+                      <Award className="w-12 h-12 text-primary-600 dark:text-primary-400 mx-auto mb-2" />
+                      <p className="text-sm font-semibold text-neutral-900 dark:text-white">Grid Leader</p>
+                    </div>
+                    <div className="text-center p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+                      <Globe className="w-12 h-12 text-secondary-600 dark:text-secondary-400 mx-auto mb-2" />
+                      <p className="text-sm font-semibold text-neutral-900 dark:text-white">Regional Leader</p>
+                    </div>
+                    <div className="text-center p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+                      <TrendingUp className="w-12 h-12 text-success-600 dark:text-success-400 mx-auto mb-2" />
+                      <p className="text-sm font-semibold text-neutral-900 dark:text-white">High Performer</p>
+                    </div>
+                    <div className="text-center p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+                      <Users className="w-12 h-12 text-accent-600 dark:text-accent-400 mx-auto mb-2" />
+                      <p className="text-sm font-semibold text-neutral-900 dark:text-white">Best Relationship</p>
+                    </div>
+                    <div className="text-center p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+                      <CheckCircle className="w-12 h-12 text-warning-600 dark:text-warning-400 mx-auto mb-2" />
+                      <p className="text-sm font-semibold text-neutral-900 dark:text-white">Most Implementable</p>
+                    </div>
+                  </div>
                 </div>
               </Card>
-
-              {/* Trade Volume Trends */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <Card padding="lg">
-                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
-                    Import Volume Trend
-                  </h3>
-                  <div className="h-64 flex items-center justify-center bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
-                    <div className="text-center">
-                      <BarChart3 className="w-16 h-16 text-primary-400 mx-auto mb-4" />
-                      <p className="text-neutral-600 dark:text-neutral-400">
-                        Import trend chart visualization
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-                
-                <Card padding="lg">
-                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
-                    Export Volume Trend
-                  </h3>
-                  <div className="h-64 flex items-center justify-center bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
-                    <div className="text-center">
-                      <BarChart3 className="w-16 h-16 text-secondary-400 mx-auto mb-4" />
-                      <p className="text-neutral-600 dark:text-neutral-400">
-                        Export trend chart visualization
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-              </div>
-
-              {/* Geographic Distribution Maps */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <Card padding="lg">
-                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
-                    Import Geographic Distribution
-                  </h3>
-                  <div className="h-64 flex items-center justify-center bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
-                    <div className="text-center">
-                      <Globe className="w-16 h-16 text-primary-400 mx-auto mb-4" />
-                      <p className="text-neutral-600 dark:text-neutral-400">
-                        Import countries map visualization
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-                
-                <Card padding="lg">
-                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
-                    Export Geographic Distribution
-                  </h3>
-                  <div className="h-64 flex items-center justify-center bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
-                    <div className="text-center">
-                      <Globe className="w-16 h-16 text-secondary-400 mx-auto mb-4" />
-                      <p className="text-neutral-600 dark:text-neutral-400">
-                        Export countries map visualization
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-              </div>
             </div>
           )}
         </div>
