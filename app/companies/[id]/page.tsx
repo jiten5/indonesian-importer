@@ -79,7 +79,7 @@ const companyData = {
     suppliersCount: 45,
     buyersCount: 18
   },
-  description: 'PT Glory Global Solutions Indonesia is a premier import-export company specializing in industrial equipment, machinery, and technological solutions. With over 14 years of experience in international trade, we serve as a vital bridge connecting Indonesian industries with global suppliers and markets. Our commitment to excellence and quality has made us a trusted partner for businesses across manufacturing, construction, and technology sectors.',
+  description: 'Premier import-export company specializing in industrial equipment, machinery, and technological solutions. Over 14 years connecting Indonesian industries with global markets.',
   certifications: [
     { name: 'ISO 9001:2015', icon: CheckCircle, issueDate: '2022' },
     { name: 'Customs AEO Certified', icon: Shield, issueDate: '2021' },
@@ -454,7 +454,7 @@ export default function CompanyProfilePage() {
                   : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
-              Import & Export Turnover
+              Turnover
             </button>
             <button
               onClick={() => setActiveTab('countries')}
@@ -514,7 +514,7 @@ export default function CompanyProfilePage() {
                   : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
-              Shipment Records
+              Shipments
             </button>
             <button
               onClick={() => setActiveTab('contacts')}
@@ -524,7 +524,7 @@ export default function CompanyProfilePage() {
                   : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
-              Company Employee Contacts
+              Contacts
             </button>
             <button
               onClick={() => setActiveTab('faq')}
@@ -534,7 +534,7 @@ export default function CompanyProfilePage() {
                   : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
-              Company FAQs
+              FAQs
             </button>
             <button
               onClick={() => setActiveTab('reviews')}
@@ -544,7 +544,7 @@ export default function CompanyProfilePage() {
                   : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
-              Customer Reviews & Ratings
+              Reviews & Ratings
             </button>
           </div>
         </div>

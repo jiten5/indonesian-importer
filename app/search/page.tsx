@@ -286,6 +286,11 @@ export default function SearchPage() {
             <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl mx-auto">
               Discover how businesses leverage Market Inside to expand globally, manage risks, and grow with actionable trade data.
             </p>
+            
+            {/* Search Bar */}
+            <div className="w-full max-w-4xl mx-auto">
+              <DualSearch />
+            </div>
           </div>
         </div>
       </section>
