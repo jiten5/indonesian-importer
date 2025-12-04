@@ -268,8 +268,73 @@ export default function CompanyProfilePage() {
   const [competitorsSubTab, setCompetitorsSubTab] = useState<'import' | 'export'>('import')
   const [shipmentsSubTab, setShipmentsSubTab] = useState<'import' | 'export'>('import')
 
+  // Handle tab click and scroll to section
+  const handleTabClick = (tab: 'overview' | 'turnover' | 'countries' | 'commodities' | 'supply-chain' | 'ports' | 'competitors' | 'shipments' | 'contacts' | 'faq' | 'reviews') => {
+    setActiveTab(tab)
+    const element = document.getElementById(tab)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
+  // Generate Review Schema for SEO
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `https://indonesianimporter.com/companies/${companyData.id}`,
+    "name": companyData.name,
+    "url": `https://indonesianimporter.com/companies/${companyData.id}`,
+    "logo": `https://indonesianimporter.com${companyData.logo}`,
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": companyData.rating.toString(),
+      "reviewCount": customerReviews.length.toString(),
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": customerReviews.map(review => ({
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": review.name
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": review.rating.toString(),
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "datePublished": review.date,
+      "reviewBody": review.comment,
+      "publisher": {
+        "@type": "Organization",
+        "name": review.company
+      }
+    })),
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": companyData.address.street,
+      "addressLocality": companyData.address.city,
+      "addressRegion": companyData.address.province,
+      "postalCode": companyData.address.postal,
+      "addressCountry": companyData.address.country
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": companyData.contact.phone,
+      "contactType": "customer service",
+      "email": companyData.contact.email
+    }
+  }
+
   return (
     <MainLayout>
+      {/* Review Schema Markup for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
+      />
+
       {/* Company Header */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 pt-32 pb-12 pt-24">
         <div className="container-custom relative z-10">
@@ -437,7 +502,7 @@ export default function CompanyProfilePage() {
         <div className="container-custom">
           <div className="flex space-x-8 overflow-x-auto">
             <button
-              onClick={() => setActiveTab('overview')}
+              onClick={() => handleTabClick('overview')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'overview'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
@@ -447,7 +512,7 @@ export default function CompanyProfilePage() {
               Overview
             </button>
             <button
-              onClick={() => setActiveTab('turnover')}
+              onClick={() => handleTabClick('turnover')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'turnover'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
@@ -457,7 +522,7 @@ export default function CompanyProfilePage() {
               Turnover
             </button>
             <button
-              onClick={() => setActiveTab('countries')}
+              onClick={() => handleTabClick('countries')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'countries'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
@@ -467,7 +532,7 @@ export default function CompanyProfilePage() {
               Countries
             </button>
             <button
-              onClick={() => setActiveTab('commodities')}
+              onClick={() => handleTabClick('commodities')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'commodities'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
@@ -477,7 +542,7 @@ export default function CompanyProfilePage() {
               Commodities
             </button>
             <button
-              onClick={() => setActiveTab('supply-chain')}
+              onClick={() => handleTabClick('supply-chain')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'supply-chain'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
@@ -487,7 +552,7 @@ export default function CompanyProfilePage() {
               Supply Chain
             </button>
             <button
-              onClick={() => setActiveTab('ports')}
+              onClick={() => handleTabClick('ports')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'ports'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
@@ -497,7 +562,7 @@ export default function CompanyProfilePage() {
               Ports
             </button>
             <button
-              onClick={() => setActiveTab('competitors')}
+              onClick={() => handleTabClick('competitors')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'competitors'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
@@ -507,7 +572,7 @@ export default function CompanyProfilePage() {
               Competitors
             </button>
             <button
-              onClick={() => setActiveTab('shipments')}
+              onClick={() => handleTabClick('shipments')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'shipments'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
@@ -517,7 +582,7 @@ export default function CompanyProfilePage() {
               Shipments
             </button>
             <button
-              onClick={() => setActiveTab('contacts')}
+              onClick={() => handleTabClick('contacts')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'contacts'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
@@ -527,7 +592,7 @@ export default function CompanyProfilePage() {
               Contacts
             </button>
             <button
-              onClick={() => setActiveTab('faq')}
+              onClick={() => handleTabClick('faq')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'faq'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
@@ -537,7 +602,7 @@ export default function CompanyProfilePage() {
               FAQs
             </button>
             <button
-              onClick={() => setActiveTab('reviews')}
+              onClick={() => handleTabClick('reviews')}
               className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'reviews'
                   ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
@@ -554,8 +619,7 @@ export default function CompanyProfilePage() {
       <section className="py-20 bg-neutral-50 dark:bg-neutral-950">
         <div className="container-custom">
           {/* Overview Tab */}
-          {activeTab === 'overview' && (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div id="overview" className="grid grid-cols-1 lg:grid-cols-3 gap-8 scroll-mt-24">
               {/* Company Details */}
               <div className="lg:col-span-2 space-y-8">
                 <Card padding="lg">
@@ -599,96 +663,15 @@ export default function CompanyProfilePage() {
                     </div>
                   </div>
                 </Card>
-
-                <Card padding="lg">
-                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-                    Certifications & Awards
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {companyData.certifications.map((cert, index) => {
-                      const IconComponent = cert.icon
-                      return (
-                        <div key={index} className="flex items-center space-x-3 p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
-                          <IconComponent className="w-6 h-6 text-success-600 dark:text-success-400" />
-                          <span className="font-medium text-neutral-900 dark:text-white">
-                            {cert.name}
-                          </span>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </Card>
-
-                <Card padding="lg">
-                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-                    Top Product Categories
-                  </h3>
-                  <div className="space-y-4">
-                    {topProducts.map((product, index) => (
-                      <div key={index}>
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center space-x-3">
-                            <span className="font-medium text-neutral-900 dark:text-white">
-                              {product.name}
-                            </span>
-                            {product.trend === 'up' ? (
-                              <TrendingUp className="w-4 h-4 text-success-600 dark:text-success-400" />
-                            ) : product.trend === 'down' ? (
-                              <TrendingDown className="w-4 h-4 text-error-600 dark:text-error-400" />
-                            ) : null}
-                          </div>
-                          <span className="font-bold text-neutral-900 dark:text-white">
-                            {product.value}
-                          </span>
-                        </div>
-                        <div className="h-2 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-primary-600 dark:bg-primary-400 rounded-full"
-                            style={{ width: `${product.share}%` }}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </Card>
-              </div>
-
-              {/* Sidebar */}
-              <div className="space-y-8">
-                <Card padding="lg">
-                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
-                    Top Trading Partners
-                  </h3>
-                  <div className="space-y-4">
-                    {topPartners.map((partner, index) => (
-                      <div key={index} className="flex items-center justify-between pb-4 border-b dark:border-neutral-800 last:border-0 last:pb-0">
-                        <div className="flex items-center space-x-3">
-                          <span className="text-2xl">{partner.flag}</span>
-                          <div>
-                            <div className="font-medium text-neutral-900 dark:text-white">
-                              {partner.country}
-                            </div>
-                            <div className="text-sm text-neutral-600 dark:text-neutral-400">
-                              {partner.trades} shipments
-                            </div>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className="font-bold text-neutral-900 dark:text-white">
-                            {partner.value}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </Card>
               </div>
             </div>
-          )}
 
           {/* Turnover Tab */}
-          {activeTab === 'turnover' && (
-            <div className="space-y-6">
+          <div id="turnover" className="space-y-6 scroll-mt-24 mt-12">
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-3">Turnover Analysis</h2>
+                <p className="text-lg text-neutral-600 dark:text-neutral-400">Comprehensive overview of import and export turnover trends, shipment volumes, and monthly performance metrics over the last 12 months.</p>
+              </div>
               {/* Sub-tabs for Import/Export */}
               <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
                 <button
@@ -757,11 +740,13 @@ export default function CompanyProfilePage() {
                 </Card>
               )}
             </div>
-          )}
 
           {/* Countries Tab */}
-          {activeTab === 'countries' && (
-            <div className="space-y-6">
+          <div id="countries" className="space-y-6 scroll-mt-24 mt-12">
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-3">Trading Countries</h2>
+                <p className="text-lg text-neutral-600 dark:text-neutral-400">Explore top trading partner countries with detailed insights into shipment volumes, trade values, market share distribution, and year-over-year growth trends.</p>
+              </div>
               {/* Sub-tabs for Import/Export */}
               <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
                 <button
@@ -888,11 +873,13 @@ export default function CompanyProfilePage() {
                 </Card>
               )}
             </div>
-          )}
 
           {/* Commodities Tab */}
-          {activeTab === 'commodities' && (
-            <div className="space-y-6">
+          <div id="commodities" className="space-y-6 scroll-mt-24 mt-12">
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-3">Products & Commodities</h2>
+                <p className="text-lg text-neutral-600 dark:text-neutral-400">Detailed breakdown of traded products by HSN codes, including shipment quantities, trade values, market share, and performance trends for both imports and exports.</p>
+              </div>
               {/* Sub-tabs for Import/Export */}
               <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
                 <button
@@ -1015,11 +1002,13 @@ export default function CompanyProfilePage() {
               </Card>
               )}
             </div>
-          )}
 
           {/* Ports Tab */}
-          {activeTab === 'ports' && (
-            <div className="space-y-6">
+          <div id="ports" className="space-y-6 scroll-mt-24 mt-12">
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-3">Port Operations</h2>
+                <p className="text-lg text-neutral-600 dark:text-neutral-400">Analysis of port utilization across Indonesia's major seaports, including shipment volumes, cargo values, operational frequencies, and infrastructure efficiency metrics.</p>
+              </div>
               {/* Sub-tabs for Import/Export */}
               <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
                 <button
@@ -1116,11 +1105,13 @@ export default function CompanyProfilePage() {
               </Card>
               )}
             </div>
-          )}
 
           {/* Shipments Tab */}
-          {activeTab === 'shipments' && (
-            <div className="space-y-6">
+          <div id="shipments" className="space-y-6 scroll-mt-24 mt-12">
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-3">Recent Shipments</h2>
+                <p className="text-lg text-neutral-600 dark:text-neutral-400">Complete record of recent import and export shipments with details on products, suppliers, buyers, origins, destinations, ports, and transaction values.</p>
+              </div>
               {/* Sub-tabs for Import/Export */}
               <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
                 <button
@@ -1219,11 +1210,13 @@ export default function CompanyProfilePage() {
               </Card>
               )}
             </div>
-          )}
 
           {/* Supply Chain Tab */}
-          {activeTab === 'supply-chain' && (
-            <div className="space-y-6">
+          <div id="supply-chain" className="space-y-6 scroll-mt-24 mt-12">
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-3">Supply Chain Network</h2>
+                <p className="text-lg text-neutral-600 dark:text-neutral-400">Comprehensive overview of business relationships with key suppliers and buyers, including trade volumes, partnership values, industries served, and recent activity.</p>
+              </div>
               {/* Sub-tabs for Suppliers/Buyers */}
               <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
                 <button
@@ -1332,18 +1325,16 @@ export default function CompanyProfilePage() {
                   </table>
                 </div>
               </Card>
-              )}\n            </div>
-          )}
+              )}
+            </div>
 
-          {/* Contacts Tab */}
-          {activeTab === 'contacts' && (
-            <div className="space-y-8">
-              {/* Key Decision Makers */}
-              <Card padding="lg">
-                <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-                  <UserCheck className="w-6 h-6 inline mr-2" />
-                  Key Decision Makers & Contacts
-                </h3>
+          {/* Key Decision Makers & Contacts Tab */}
+          <div id="contacts" className="space-y-6 scroll-mt-24 mt-12">
+            <Card padding="lg">
+              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+                <UserCheck className="w-6 h-6 inline mr-2" />
+                Key Decision Makers & Contacts
+              </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {decisionMakers.map((contact) => (
                     <div key={contact.email} className="p-6 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg border border-neutral-200 dark:border-neutral-700">
@@ -1376,224 +1367,10 @@ export default function CompanyProfilePage() {
                   ))}
                 </div>
               </Card>
-
-              {/* Customer Reviews */}
-              <Card padding="lg">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                    Customer Reviews & Ratings
-                  </h3>
-                  <div className="flex items-center space-x-2">
-                    <div className="flex items-center space-x-1">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star key={star} className={`w-5 h-5 ${star <= Math.round(companyData.rating) ? 'text-warning-500 fill-warning-500' : 'text-neutral-300 dark:text-neutral-600'}`} />
-                      ))}
-                    </div>
-                    <span className="text-lg font-bold text-neutral-900 dark:text-white">{companyData.rating}</span>
-                    <span className="text-neutral-600 dark:text-neutral-400">({customerReviews.length} reviews)</span>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  {customerReviews.map((review) => (
-                    <div key={review.id} className="p-6 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg border border-neutral-200 dark:border-neutral-700">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
-                          <div className="flex items-center space-x-2 mb-1">
-                            <h4 className="font-semibold text-neutral-900 dark:text-white">{review.name}</h4>
-                            {review.verified && (
-                              <Badge variant="success" size="sm">
-                                <CheckCircle className="w-3 h-3 mr-1" />
-                                Verified
-                              </Badge>
-                            )}
-                          </div>
-                          <p className="text-sm text-neutral-600 dark:text-neutral-400">{review.company}</p>
-                        </div>
-                        <div className="text-right">
-                          <div className="flex items-center space-x-1 mb-1">
-                            {[1, 2, 3, 4, 5].map((star) => (
-                              <Star key={star} className={`w-4 h-4 ${star <= review.rating ? 'text-warning-500 fill-warning-500' : 'text-neutral-300 dark:text-neutral-600'}`} />
-                            ))}
-                          </div>
-                          <p className="text-sm text-neutral-600 dark:text-neutral-400">{review.date}</p>
-                        </div>
-                      </div>
-                      <p className="text-neutral-700 dark:text-neutral-300">{review.comment}</p>
-                    </div>
-                  ))}
-                </div>
-              </Card>
             </div>
-          )}
 
-          {/* Competitors Tab */}
-          {activeTab === 'competitors' && (
-            <div className="space-y-6">
-              {/* Sub-tabs for Import/Export */}
-              <div className="flex space-x-2 border-b border-neutral-200 dark:border-neutral-800">
-                <button
-                  onClick={() => setCompetitorsSubTab('import')}
-                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
-                    competitorsSubTab === 'import'
-                      ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
-                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
-                  }`}
-                >
-                  Import Competitors
-                </button>
-                <button
-                  onClick={() => setCompetitorsSubTab('export')}
-                  className={`py-3 px-6 font-medium transition-colors border-b-2 ${
-                    competitorsSubTab === 'export'
-                      ? 'border-secondary-600 text-secondary-600 dark:border-secondary-400 dark:text-secondary-400'
-                      : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
-                  }`}
-                >
-                  Export Competitors
-                </button>
-              </div>
-
-              {/* Import Competitors Content */}
-              {competitorsSubTab === 'import' && (
-                <div className="space-y-8">
-                  <Card padding="lg">
-                    <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-                      <Shield className="w-6 h-6 inline mr-2" />
-                      Import Competitors
-                    </h3>
-                    <div className="overflow-x-auto">
-                      <table className="w-full">
-                        <thead>
-                          <tr className="border-b-2 border-neutral-200 dark:border-neutral-800">
-                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Rank</th>
-                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Company Name</th>
-                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Shipments</th>
-                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Total Value</th>
-                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Market Share</th>
-                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">YoY Growth</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {importCompetitors.map((competitor) => (
-                            <tr key={competitor.name} className="border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/30">
-                              <td className="p-4 text-neutral-900 dark:text-white font-medium">{competitor.rank}</td>
-                              <td className="p-4 font-semibold text-neutral-900 dark:text-white">{competitor.name}</td>
-                              <td className="p-4 text-neutral-600 dark:text-neutral-400">{competitor.shipments.toLocaleString()}</td>
-                              <td className="p-4 font-semibold text-success-600 dark:text-success-400">{competitor.value}</td>
-                              <td className="p-4 text-neutral-600 dark:text-neutral-400">{competitor.marketShare}%</td>
-                              <td className="p-4">
-                                <span className="text-success-600 dark:text-success-400">+{competitor.growth}%</span>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </Card>
-
-                  <Card padding="lg">
-                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
-                      Import Volume Trend
-                    </h3>
-                    <div className="h-64 flex items-center justify-center bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
-                      <div className="text-center">
-                        <BarChart3 className="w-16 h-16 text-primary-400 mx-auto mb-4" />
-                        <p className="text-neutral-600 dark:text-neutral-400">
-                          Import trend chart visualization
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
-
-                  <Card padding="lg">
-                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
-                      Import Geographic Distribution
-                    </h3>
-                    <div className="h-96 flex items-center justify-center bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
-                      <div className="text-center">
-                        <Globe className="w-16 h-16 text-primary-400 mx-auto mb-4" />
-                        <p className="text-neutral-600 dark:text-neutral-400">
-                          Interactive map showing import competitor distribution
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
-                </div>
-              )}
-
-              {/* Export Competitors Content */}
-              {competitorsSubTab === 'export' && (
-                <div className="space-y-8">
-                  <Card padding="lg">
-                    <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-                      <Shield className="w-6 h-6 inline mr-2" />
-                      Export Competitors
-                    </h3>
-                    <div className="overflow-x-auto">
-                      <table className="w-full">
-                        <thead>
-                          <tr className="border-b-2 border-neutral-200 dark:border-neutral-800">
-                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Rank</th>
-                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Company Name</th>
-                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Shipments</th>
-                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Total Value</th>
-                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">Market Share</th>
-                            <th className="text-left p-4 font-semibold text-neutral-900 dark:text-white">YoY Growth</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {exportCompetitors.map((competitor) => (
-                            <tr key={competitor.name} className="border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/30">
-                              <td className="p-4 text-neutral-900 dark:text-white font-medium">{competitor.rank}</td>
-                              <td className="p-4 font-semibold text-neutral-900 dark:text-white">{competitor.name}</td>
-                              <td className="p-4 text-neutral-600 dark:text-neutral-400">{competitor.shipments.toLocaleString()}</td>
-                              <td className="p-4 font-semibold text-success-600 dark:text-success-400">{competitor.value}</td>
-                              <td className="p-4 text-neutral-600 dark:text-neutral-400">{competitor.marketShare}%</td>
-                              <td className="p-4">
-                                <span className="text-success-600 dark:text-success-400">+{competitor.growth}%</span>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </Card>
-
-                  <Card padding="lg">
-                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
-                      Export Volume Trend
-                    </h3>
-                    <div className="h-64 flex items-center justify-center bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
-                      <div className="text-center">
-                        <BarChart3 className="w-16 h-16 text-secondary-400 mx-auto mb-4" />
-                        <p className="text-neutral-600 dark:text-neutral-400">
-                          Export trend chart visualization
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
-
-                  <Card padding="lg">
-                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
-                      Export Geographic Distribution
-                    </h3>
-                    <div className="h-96 flex items-center justify-center bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
-                      <div className="text-center">
-                        <Globe className="w-16 h-16 text-secondary-400 mx-auto mb-4" />
-                        <p className="text-neutral-600 dark:text-neutral-400">
-                          Interactive map showing export competitor distribution
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* FAQ Tab */}
-          {activeTab === 'faq' && (
-            <div className="space-y-8">
+          {/* FAQs Tab */}
+          <div id="faq" className="space-y-6 scroll-mt-24 mt-12">
               <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-12">
                   <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-4">
@@ -1826,21 +1603,19 @@ export default function CompanyProfilePage() {
                 </div>
               </div>
             </div>
-          )}
 
-          {/* Customer Reviews & Ratings Tab */}
-          {activeTab === 'reviews' && (
-            <div className="space-y-8">
-              <Card padding="lg">
-                <div className="flex items-center justify-between mb-8">
-                  <div>
-                    <h3 className="text-3xl font-bold text-neutral-900 dark:text-white mb-2">
-                      Customer Reviews & Ratings
-                    </h3>
-                    <p className="text-neutral-600 dark:text-neutral-400">
-                      Trusted by businesses everywhere - from manufacturers and traders to logistics providers and consultants
-                    </p>
-                  </div>
+          {/* Reviews Tab */}
+          <div id="reviews" className="space-y-6 scroll-mt-24 mt-12">
+            <Card padding="lg">
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <h3 className="text-3xl font-bold text-neutral-900 dark:text-white mb-2">
+                    Customer Reviews & Ratings
+                  </h3>
+                  <p className="text-neutral-600 dark:text-neutral-400">
+                    Trusted by businesses everywhere - from manufacturers and traders to logistics providers and consultants
+                  </p>
+                </div>
                   <div className="text-right">
                     <div className="flex items-center justify-end space-x-2 mb-2">
                       <div className="flex items-center space-x-1">
@@ -1944,7 +1719,6 @@ export default function CompanyProfilePage() {
                 </div>
               </Card>
             </div>
-          )}
         </div>
       </section>
     </MainLayout>
