@@ -60,9 +60,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => (
         
         {/* Subheadline - Improved Clarity */}
         <p className="text-lg md:text-xl lg:text-2xl text-neutral-600 dark:text-neutral-300 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
-          Access 615M+ shipment records, discover suppliers, track competitors, and make data-driven decisions with real-time Indonesian trade intelligence.
+          Access 615M+ shipment records, discover suppliers, track competitors, and make data-driven decisions with Indonesian trade intelligence.
         </p>
-        
         {/* Search Bar - Enhanced */}
         <div className="w-full max-w-4xl mx-auto mb-8">
           <DualSearch onSearch={onSearch} />

@@ -4,6 +4,7 @@ import React from 'react';
 import MainLayout from '@/components/layouts/MainLayout';
 import { useRouter } from 'next/navigation';
 import HeroSection from '@/components/Homepage/HeroSection';
+import ProblemsSection from '@/components/Homepage/ProblemsSection';
 import StatsSection from '@/components/Homepage/StatsSection';
 import ProductsSection from '@/components/Homepage/ProductsSection';
 import SolutionsSection from '@/components/Homepage/SolutionsSection';
@@ -19,6 +20,7 @@ export default function HomePage() {
   return (
     <MainLayout>
       <HeroSection onSearch={handleSearch} />
+      <ProblemsSection />
       <StatsSection />
       <ProductsSection />
       <SolutionsSection />
