@@ -16,11 +16,11 @@ const StatsSection: React.FC = () => (
           By The Numbers
         </div>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-neutral-900 dark:text-white mb-6 leading-tight">
-          Powering Global Trade
-          <br />
           <span className="bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-400 dark:to-secondary-400 bg-clip-text text-transparent">
-            Intelligence
+            Data That
           </span>
+          <br />
+          Matters
         </h2>
         <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed">
           Real-time access to the world's most comprehensive Indonesian trade database

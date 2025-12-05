@@ -97,11 +97,11 @@ const ProblemsSection: React.FC = () => (
           Solutions That Work
         </div>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-neutral-900 dark:text-white mb-6 leading-tight">
-          Solving the Biggest Trade
-          <br />
           <span className="bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-400 dark:to-secondary-400 bg-clip-text text-transparent">
-            Problems Businesses Face
+            Solutions That
           </span>
+          <br />
+          Work
         </h2>
         <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed">
           Transform complex trade challenges into competitive advantages with our comprehensive intelligence platform
@@ -117,20 +117,23 @@ const ProblemsSection: React.FC = () => (
           return (
             <div
               key={index}
-              className={`group relative ${colors.bg} rounded-2xl p-8 border ${colors.border} hover:shadow-xl transition-all duration-300`}
+              className={`group relative ${colors.bg} rounded-2xl p-8 border ${colors.border} hover:shadow-2xl hover:shadow-primary-500/10 dark:hover:shadow-primary-500/20 hover:scale-105 transition-all duration-300 backdrop-blur-sm`}
             >
+              {/* Glassmorphism overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent dark:from-white/5 dark:to-transparent rounded-2xl pointer-events-none"></div>
+              
               {/* Icon */}
-              <div className={`inline-flex p-3 ${colors.iconBg} rounded-xl mb-6`}>
+              <div className={`relative inline-flex p-3 ${colors.iconBg} rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
                 <Icon className={`w-6 h-6 ${colors.icon}`} />
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-4">
+              <h3 className="relative text-xl font-bold text-neutral-900 dark:text-white mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
                 {item.title}
               </h3>
 
               {/* Problem */}
-              <div className="mb-4">
+              <div className="relative mb-4">
                 <div className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-2">
                   Problem
                 </div>
@@ -140,7 +143,7 @@ const ProblemsSection: React.FC = () => (
               </div>
 
               {/* Solution */}
-              <div className="mb-4">
+              <div className="relative mb-4">
                 <div className={`inline-flex px-3 py-1 rounded-full text-xs font-semibold ${colors.badge} mb-2`}>
                   Our Solution
                 </div>
@@ -150,9 +153,9 @@ const ProblemsSection: React.FC = () => (
               </div>
 
               {/* Example */}
-              <div className={`mt-6 pt-6 border-t ${colors.border}`}>
+              <div className={`relative mt-6 pt-6 border-t ${colors.border}`}>
                 <div className="flex items-start gap-2">
-                  <span className="text-lg">💡</span>
+                  <span className="text-lg group-hover:animate-pulse">💡</span>
                   <p className="text-xs text-neutral-600 dark:text-neutral-400 italic leading-relaxed">
                     {item.example}
                   </p>

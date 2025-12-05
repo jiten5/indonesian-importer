@@ -146,7 +146,10 @@ const SolutionsSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-neutral-900 dark:text-white mb-6 leading-tight">
-            Solutions by Industry
+            <span className="bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-400 dark:to-secondary-400 bg-clip-text text-transparent">
+              Industry
+            </span>
+            {' '}Solutions
           </h2>
           <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed">
             Tailored trade intelligence solutions designed specifically for your industry's unique challenges and opportunities
@@ -162,14 +165,14 @@ const SolutionsSection: React.FC = () => {
                 key={solution.id}
                 onClick={() => setActiveSolution(solution.id)}
                 className={`
-                  flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-200
+                  flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium transition-all duration-300
                   ${activeSolution === solution.id
-                    ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30'
-                    : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'
+                    ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-xl shadow-primary-600/30 scale-105'
+                    : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:scale-105 hover:shadow-lg'
                   }
                 `}
               >
-                <SolutionIcon className="w-4 h-4" />
+                <SolutionIcon className={`w-4 h-4 ${activeSolution === solution.id ? 'animate-pulse' : ''}`} />
                 <span className="text-sm">{solution.name}</span>
               </button>
             );
@@ -181,15 +184,20 @@ const SolutionsSection: React.FC = () => {
           key={activeSolution}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className="grid lg:grid-cols-2 gap-12 items-center"
         >
           {/* Left Column - Content */}
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full mb-6">
+            <motion.div 
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-100 to-secondary-100 dark:from-primary-900/30 dark:to-secondary-900/30 text-primary-700 dark:text-primary-300 rounded-full mb-6 backdrop-blur-sm"
+            >
               <Icon className="w-4 h-4" />
               <span className="text-sm font-semibold">{currentSolution.name}</span>
-            </div>
+            </motion.div>
 
             <h3 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
               {currentSolution.tagline}
@@ -205,8 +213,14 @@ const SolutionsSection: React.FC = () => {
                 const description = descParts.join(' - ');
                 
                 return (
-                  <div key={index} className="flex gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-0.5" />
+                  <motion.div 
+                    key={index} 
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex gap-3 group/benefit hover:translate-x-2 transition-transform duration-200"
+                  >
+                    <CheckCircle className="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-0.5 group-hover/benefit:scale-110 transition-transform duration-200" />
                     <div>
                       <p className="text-neutral-900 dark:text-white font-semibold">
                         {title}
@@ -220,13 +234,13 @@ const SolutionsSection: React.FC = () => {
                         )}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
 
             <Link href={currentSolution.href}>
-              <Button variant="primary" size="lg" className="group">
+              <Button variant="primary" size="lg" className="group hover:scale-105 hover:shadow-xl transition-all duration-300">
                 Learn More
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -235,20 +249,29 @@ const SolutionsSection: React.FC = () => {
 
           {/* Right Column - Visual */}
           <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-primary-900/20 dark:to-secondary-900/20 p-12 aspect-square flex items-center justify-center">
+            <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-primary-900/20 dark:to-secondary-900/20 p-12 aspect-square flex items-center justify-center backdrop-blur-sm border border-primary-200/20 dark:border-primary-800/20 shadow-xl">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl"></div>
-                <Icon className="w-48 h-48 text-primary-600 dark:text-primary-400 relative z-10" />
+                <motion.div 
+                  animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.3, 0.2] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl"
+                ></motion.div>
+                <motion.div
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                >
+                  <Icon className="w-48 h-48 text-primary-600 dark:text-primary-400 relative z-10" />
+                </motion.div>
               </div>
               
               {/* Floating Elements */}
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-8 right-8 bg-white dark:bg-neutral-800 rounded-lg shadow-xl p-4 w-32"
+                className="absolute top-8 right-8 bg-white/80 dark:bg-neutral-800/80 backdrop-blur-md rounded-xl shadow-xl p-4 w-32 border border-white/20 dark:border-neutral-700/20"
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                   <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Live Data</span>
                 </div>
                 <div className="text-2xl font-bold text-primary-600">143K+</div>
@@ -258,10 +281,10 @@ const SolutionsSection: React.FC = () => {
               <motion.div
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute bottom-8 left-8 bg-white dark:bg-neutral-800 rounded-lg shadow-xl p-4 w-32"
+                className="absolute bottom-8 left-8 bg-white/80 dark:bg-neutral-800/80 backdrop-blur-md rounded-xl shadow-xl p-4 w-32 border border-white/20 dark:border-neutral-700/20"
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
                   <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Growth</span>
                 </div>
                 <div className="text-2xl font-bold text-success-600">+5.2%</div>

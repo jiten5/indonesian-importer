@@ -78,7 +78,10 @@ const ProductsSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-neutral-900 dark:text-white mb-6 leading-tight">
-            Unlock Trade Intelligence
+            <span className="bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-400 dark:to-secondary-400 bg-clip-text text-transparent">
+              Our
+            </span>
+            {' '}Products
           </h2>
           <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed">
             Whether you prefer an intuitive web platform, powerful API integration, or complete offline datasets—we have the right solution for your business needs.
@@ -95,18 +98,18 @@ const ProductsSection: React.FC = () => {
                   key={product.id}
                   onClick={() => setActiveProduct(product.id)}
                   className={`
-                    w-full text-left p-4 rounded-lg transition-all duration-200
+                    w-full text-left p-4 rounded-xl transition-all duration-300
                     ${activeProduct === product.id
-                      ? 'bg-white dark:bg-neutral-900 shadow-lg'
-                      : 'hover:bg-white/50 dark:hover:bg-neutral-900/50'
+                      ? 'bg-white dark:bg-neutral-900 shadow-2xl shadow-primary-500/10 dark:shadow-primary-500/20 scale-105 border border-primary-200 dark:border-primary-800'
+                      : 'hover:bg-white/70 dark:hover:bg-neutral-900/70 hover:shadow-lg hover:scale-102 backdrop-blur-sm border border-transparent'
                     }
                   `}
                 >
                   <div className="flex items-start gap-4">
                     <span className={`
-                      text-2xl font-black
+                      text-2xl font-black transition-all duration-300
                       ${activeProduct === product.id
-                        ? 'text-neutral-900 dark:text-white'
+                        ? 'text-transparent bg-gradient-to-br from-primary-600 to-secondary-600 dark:from-primary-400 dark:to-secondary-400 bg-clip-text'
                         : 'text-neutral-400 dark:text-neutral-600'
                       }
                     `}>
@@ -114,7 +117,7 @@ const ProductsSection: React.FC = () => {
                     </span>
                     <div className="flex-1">
                       <h3 className={`
-                        text-lg font-bold mb-1
+                        text-lg font-bold mb-1 transition-colors duration-300
                         ${activeProduct === product.id
                           ? 'text-neutral-900 dark:text-white'
                           : 'text-neutral-600 dark:text-neutral-400'
@@ -140,20 +143,28 @@ const ProductsSection: React.FC = () => {
               key={activeProduct}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-gradient-to-br from-primary-500 to-secondary-600 rounded-2xl p-8 lg:p-12 text-white relative overflow-hidden"
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="bg-gradient-to-br from-primary-500 to-secondary-600 rounded-2xl p-8 lg:p-12 text-white relative overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300"
             >
-              {/* Background Pattern */}
+              {/* Background Pattern - Enhanced */}
               <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
-                <div className="absolute bottom-0 left-0 w-48 h-48 bg-white rounded-full blur-3xl"></div>
+                <motion.div 
+                  animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"
+                ></motion.div>
+                <motion.div 
+                  animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute bottom-0 left-0 w-48 h-48 bg-white rounded-full blur-3xl"
+                ></motion.div>
               </div>
 
               {/* Content */}
               <div className="relative z-10">
-                <div className="inline-flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                    <Icon className="w-6 h-6" />
+                <div className="inline-flex items-center gap-3 mb-6 backdrop-blur-sm bg-white/10 px-4 py-2 rounded-lg">
+                  <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="w-5 h-5" />
                   </div>
                   <span className="text-sm font-bold uppercase tracking-wider opacity-90">
                     {currentProduct.name}
@@ -171,12 +182,18 @@ const ProductsSection: React.FC = () => {
                 {/* Features List */}
                 <div className="space-y-3 mb-8">
                   {currentProduct.features.map((feature, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="w-5 h-5 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <motion.div 
+                      key={index} 
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-start gap-3 group/item hover:translate-x-1 transition-transform duration-200"
+                    >
+                      <div className="w-5 h-5 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 group-hover/item:scale-110 transition-transform duration-200">
                         <div className="w-2 h-2 bg-white rounded-full"></div>
                       </div>
                       <span className="text-base opacity-90">{feature}</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
 
@@ -185,7 +202,7 @@ const ProductsSection: React.FC = () => {
                   <Button 
                     variant="secondary" 
                     size="lg" 
-                    className="bg-white text-primary-600 hover:bg-neutral-100 group"
+                    className="bg-white text-primary-600 hover:bg-neutral-100 hover:scale-105 hover:shadow-xl group transition-all duration-300"
                   >
                     Learn more
                     <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -193,10 +210,14 @@ const ProductsSection: React.FC = () => {
                 </Link>
               </div>
 
-              {/* Decorative Icon */}
-              <div className="absolute bottom-0 right-0 opacity-5">
+              {/* Decorative Icon - Enhanced */}
+              <motion.div 
+                animate={{ rotate: [0, 5, 0], opacity: [0.05, 0.08, 0.05] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute bottom-0 right-0"
+              >
                 <Icon className="w-64 h-64 transform translate-x-16 translate-y-16" />
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>

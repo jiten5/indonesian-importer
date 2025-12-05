@@ -47,9 +47,10 @@ const FinalCTASection: React.FC = () => (
 
         {/* Headline */}
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
-          Ready to Transform Your
-          <br />
-          Global Business Strategy?
+          <span className="block">Transform Your</span>
+          <span className="bg-gradient-to-r from-yellow-200 to-yellow-400 bg-clip-text text-transparent">
+            Business Today
+          </span>
         </h2>
         
         {/* Subheadline */}

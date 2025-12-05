@@ -51,11 +51,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => (
         
         {/* Headline - Enhanced Typography */}
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-neutral-900 dark:text-white mb-6 leading-tight tracking-tight">
-          Unlock Global Trade
-          <br />
           <span className="bg-gradient-to-r from-primary-600 via-primary-500 to-secondary-600 dark:from-primary-400 dark:via-primary-300 dark:to-secondary-400 bg-clip-text text-transparent">
-            Intelligence
+            Trade Intelligence
           </span>
+          <br />
+          Unlocked
         </h1>
         
         {/* Subheadline - Improved Clarity */}
