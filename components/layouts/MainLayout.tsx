@@ -37,8 +37,14 @@ const defaultNavigation = [
     ]
   },
   { label: 'Search', href: '/search' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  {
+    label: 'Resources',
+    href: '#',
+    items: [
+      { label: 'About', href: '/about' },
+      { label: 'Contact', href: '/contact' },
+    ]
+  },
 ]
 
 const defaultFooterSections = [

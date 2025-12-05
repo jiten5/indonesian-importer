@@ -19,8 +19,7 @@ const StatsSection: React.FC = () => (
           <span className="bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-400 dark:to-secondary-400 bg-clip-text text-transparent">
             Data That
           </span>
-          <br />
-          Matters
+          {' '}Matters
         </h2>
         <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed">
           Real-time access to the world's most comprehensive Indonesian trade database

@@ -29,13 +29,14 @@ const Navbar: React.FC<NavbarProps> = ({
   logo,
   logoText = 'Trade Intelligence',
   navigation,
-  ctaText = 'Get Started',
+  ctaText = 'Book A Demo',
   ctaHref = '/signup',
   className
 }) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [showBookDemoModal, setShowBookDemoModal] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,6 +56,20 @@ const Navbar: React.FC<NavbarProps> = ({
       document.body.style.overflow = 'unset'
     }
   }, [mobileMenuOpen])
+
+  useEffect(() => {
+    if (showBookDemoModal) {
+      // Load Cal.com embed script
+      const script = document.createElement('script')
+      script.src = 'https://app.cal.com/embed/embed.js'
+      script.async = true
+      document.body.appendChild(script)
+      
+      return () => {
+        document.body.removeChild(script)
+      }
+    }
+  }, [showBookDemoModal])
 
   return (
     <nav
@@ -105,7 +120,31 @@ const Navbar: React.FC<NavbarProps> = ({
                 {/* Mega Menu Dropdown */}
                 {item.items && activeDropdown === item.label && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-auto bg-white dark:bg-neutral-800 rounded-xl shadow-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden animate-fade-in">
-                    {item.label === 'Products' ? (
+                    {item.label === 'Resources' ? (
+                      // Simple dropdown for Resources
+                      <div className="p-3 flex flex-col gap-1" style={{ minWidth: '200px' }}>
+                        <Link
+                          href="/about"
+                          className="group/item flex items-start gap-3 px-3 py-3 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-all duration-200"
+                        >
+                          <div className="flex-1 min-w-0">
+                            <span className="font-semibold text-sm text-neutral-900 dark:text-white group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400 transition-colors whitespace-nowrap">
+                              About
+                            </span>
+                          </div>
+                        </Link>
+                        <Link
+                          href="/contact"
+                          className="group/item flex items-start gap-3 px-3 py-3 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-all duration-200"
+                        >
+                          <div className="flex-1 min-w-0">
+                            <span className="font-semibold text-sm text-neutral-900 dark:text-white group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400 transition-colors whitespace-nowrap">
+                              Contact
+                            </span>
+                          </div>
+                        </Link>
+                      </div>
+                    ) : item.label === 'Products' ? (
                       // Single column layout for Products
                       <div className="p-3 flex flex-col gap-1" style={{ minWidth: '280px' }}>
                         {item.items.map((subItem, idx) => (
@@ -236,20 +275,31 @@ const Navbar: React.FC<NavbarProps> = ({
 
             {/* Login Link */}
             <Link 
-              href="/login" 
+              href="https://dashboard.exportgenius.in/" 
               className="hidden lg:flex items-center px-4 py-2 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-primary-600 dark:hover:text-primary-400 transition-all font-medium text-sm"
             >
               Login
             </Link>
 
-            {/* CTA Button */}
+            {/* Try Free Button */}
+            <Link href="https://dashboard.exportgenius.in/sign-up">
+              <Button
+                variant="outline"
+                size="md"
+                className="hidden lg:inline-flex border-2 border-primary-600 text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all"
+              >
+                Try Free
+              </Button>
+            </Link>
+
+            {/* Book A Demo Button */}
             <Button
               variant="primary"
               size="md"
               className="hidden lg:inline-flex shadow-lg shadow-primary-500/20 hover:shadow-xl hover:shadow-primary-500/30 transition-all"
-              onClick={() => window.location.href = ctaHref}
+              onClick={() => setShowBookDemoModal(true)}
             >
-              {ctaText}
+              Book A Demo
             </Button>
 
             {/* Mobile Menu Button */}
@@ -338,11 +388,24 @@ const Navbar: React.FC<NavbarProps> = ({
             {/* Mobile Actions */}
             <div className="mt-6 pt-4 border-t border-neutral-200 dark:border-neutral-800 space-y-2 px-2">
               <Link 
-                href="/login" 
+                href="https://dashboard.exportgenius.in/" 
                 className="flex items-center justify-center py-2.5 px-4 text-neutral-700 dark:text-neutral-300 font-medium border border-neutral-300 dark:border-neutral-700 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all" 
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Login
+              </Link>
+              <Link 
+                href="https://dashboard.exportgenius.in/sign-up" 
+                className="block"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Button
+                  variant="outline"
+                  size="md"
+                  className="w-full border-2 border-primary-600 text-primary-600"
+                >
+                  Try Free
+                </Button>
               </Link>
               <Button
                 variant="primary"
@@ -350,14 +413,45 @@ const Navbar: React.FC<NavbarProps> = ({
                 className="w-full shadow-lg shadow-primary-500/20"
                 onClick={() => {
                   setMobileMenuOpen(false)
-                  window.location.href = ctaHref
+                  setShowBookDemoModal(true)
                 }}
               >
-                {ctaText}
+                Book A Demo
               </Button>
               <div className="flex justify-center pt-2">
                 <ThemeToggle />
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Book A Demo Modal */}
+      {showBookDemoModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setShowBookDemoModal(false)}>
+          <div className="relative bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-neutral-200 dark:border-neutral-800">
+              <div>
+                <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">Book A Demo</h2>
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Schedule a personalized demo with our team</p>
+              </div>
+              <button
+                onClick={() => setShowBookDemoModal(false)}
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            {/* Cal.com Embed */}
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-100px)]">
+              <div 
+                className="cal-inline" 
+                data-cal-link="team/exportgenius/30min"
+                data-cal-config='{"layout":"month_view","theme":"light"}'
+                style={{ width: '100%', height: '600px', overflow: 'scroll' }}
+              ></div>
             </div>
           </div>
         </div>

@@ -100,8 +100,7 @@ const ProblemsSection: React.FC = () => (
           <span className="bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-400 dark:to-secondary-400 bg-clip-text text-transparent">
             Solutions That
           </span>
-          <br />
-          Work
+          {' '}Work
         </h2>
         <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed">
           Transform complex trade challenges into competitive advantages with our comprehensive intelligence platform

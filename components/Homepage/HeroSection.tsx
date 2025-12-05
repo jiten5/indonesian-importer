@@ -52,14 +52,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => (
         {/* Headline - Enhanced Typography */}
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-neutral-900 dark:text-white mb-6 leading-tight tracking-tight">
           <span className="bg-gradient-to-r from-primary-600 via-primary-500 to-secondary-600 dark:from-primary-400 dark:via-primary-300 dark:to-secondary-400 bg-clip-text text-transparent">
-            Trade Intelligence
+            Trade Intelligence 
           </span>
-          <br />
-          Unlocked
+           {' '}Unlocked
         </h1>
         
         {/* Subheadline - Improved Clarity */}
-        <p className="text-lg md:text-xl lg:text-2xl text-neutral-600 dark:text-neutral-300 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
+        <p className="text-lg md:text-xl lg:text-2xl text-neutral-600 dark:text-neutral-300 mb-10 max-w-4xl mx-auto leading-relaxed font-light">
           Access 615M+ shipment records, discover suppliers, track competitors, and make data-driven decisions with Indonesian trade intelligence.
         </p>
         {/* Search Bar - Enhanced */}

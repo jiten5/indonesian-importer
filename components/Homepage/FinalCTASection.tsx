@@ -54,7 +54,7 @@ const FinalCTASection: React.FC = () => (
         </h2>
         
         {/* Subheadline */}
-        <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed">
           Join thousands of businesses worldwide who trust Market Inside to power their international trade decisions with reliable, real-time intelligence.
         </p>
 
@@ -121,7 +121,7 @@ const FinalCTASection: React.FC = () => (
         {/* Special Offer Banner */}
         <div className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-yellow-400 text-neutral-900 font-bold text-sm shadow-lg">
           <Zap className="w-4 h-4" />
-          <span>Limited Time: Get 50% off your first 3 months when you book a demo this week</span>
+          <span>Limited Time: Get 20% off your first 3 months when you book a demo this week</span>
         </div>
       </div>
     </div>
