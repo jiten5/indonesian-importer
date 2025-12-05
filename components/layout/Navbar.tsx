@@ -63,20 +63,6 @@ const Navbar: React.FC<NavbarProps> = ({
     }
   }, [mobileMenuOpen])
 
-  useEffect(() => {
-    if (showBookDemoModal) {
-      // Load Cal.com embed script
-      const script = document.createElement('script')
-      script.src = 'https://app.cal.com/embed/embed.js'
-      script.async = true
-      document.body.appendChild(script)
-      
-      return () => {
-        document.body.removeChild(script)
-      }
-    }
-  }, [showBookDemoModal])
-
   return (
     <nav
       className={cn(
@@ -458,15 +444,16 @@ const Navbar: React.FC<NavbarProps> = ({
             </div>
             
             {/* Cal.com Embed */}
-            <div className="flex-1 overflow-y-auto bg-neutral-50 dark:bg-neutral-950">
-              <div className="p-6">
-                <div 
-                  className="cal-inline bg-white dark:bg-neutral-900 rounded-lg shadow-inner" 
-                  data-cal-link="team/exportgenius/30min"
-                  data-cal-config='{"layout":"month_view","theme":"auto"}'
-                  style={{ width: '100%', minHeight: '600px' }}
-                ></div>
-              </div>
+            <div className="flex-1 overflow-hidden bg-neutral-50 dark:bg-neutral-950">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://exportgenius.zohobookings.in/portal-embed#/eg" 
+                frameBorder="0" 
+                allowFullScreen
+                className="w-full h-full min-h-[750px]"
+                title="Book a Demo"
+              />
             </div>
           </div>
         </div>,
