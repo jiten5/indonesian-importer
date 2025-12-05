@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import ReactDOM from 'react-dom'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Menu, X, ChevronDown, Search, Database, BarChart3, Zap, Package, FileText, Target } from 'lucide-react'
@@ -37,6 +38,11 @@ const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [showBookDemoModal, setShowBookDemoModal] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -427,7 +433,7 @@ const Navbar: React.FC<NavbarProps> = ({
       )}
 
       {/* Book A Demo Modal */}
-      {showBookDemoModal && (
+      {mounted && showBookDemoModal && ReactDOM.createPortal(
         <div 
           className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in" 
           onClick={() => setShowBookDemoModal(false)}
@@ -463,7 +469,8 @@ const Navbar: React.FC<NavbarProps> = ({
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </nav>
   )
