@@ -491,9 +491,10 @@ export default function LicensePage() {
       <Footer
         sections={footerSections}
         socialLinks={[
-          { platform: 'linkedin', href: 'https://linkedin.com' },
-          { platform: 'twitter', href: 'https://twitter.com' },
-          { platform: 'github', href: 'https://github.com' }
+          { platform: 'facebook', href: 'https://www.facebook.com/exportgenius' },
+          { platform: 'linkedin', href: 'https://www.linkedin.com/company/export-genius' },
+          { platform: 'twitter', href: 'https://twitter.com/exportgenius' },
+          { platform: 'youtube', href: 'https://www.youtube.com/channel/UCESozaA6z4e0nQxyVqS8I1A' }
         ]}
       />
     </div>
