@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { Facebook, Twitter, Linkedin, Github, Mail } from 'lucide-react'
+import { Facebook, Twitter, Linkedin, Youtube, Mail } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 
@@ -18,7 +18,7 @@ interface FooterSection {
 }
 
 interface SocialLink {
-  platform: 'facebook' | 'twitter' | 'linkedin' | 'github'
+  platform: 'facebook' | 'twitter' | 'linkedin' | 'youtube'
   href: string
 }
 
@@ -45,7 +45,7 @@ const Footer: React.FC<FooterProps> = ({
     facebook: Facebook,
     twitter: Twitter,
     linkedin: Linkedin,
-    github: Github
+    youtube: Youtube
   }
 
   const currentYear = new Date().getFullYear()
