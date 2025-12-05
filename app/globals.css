@@ -407,6 +407,17 @@ h3, h4, h5, h6 {
   }
 }
 
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .animate-fade-in {
   animation: fade-in 0.2s ease-out forwards;
   will-change: opacity, transform;
@@ -414,6 +425,11 @@ h3, h4, h5, h6 {
 
 .animate-slide-in {
   animation: slide-in 0.3s ease-out forwards;
+  will-change: opacity, transform;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   will-change: opacity, transform;
 }
 
@@ -457,6 +473,7 @@ h3, h4, h5, h6 {
   
   .animate-fade-in,
   .animate-slide-in,
+  .animate-slide-up,
   .animate-shimmer {
     animation: none !important;
   }

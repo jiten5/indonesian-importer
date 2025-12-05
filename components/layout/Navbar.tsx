@@ -428,30 +428,39 @@ const Navbar: React.FC<NavbarProps> = ({
 
       {/* Book A Demo Modal */}
       {showBookDemoModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setShowBookDemoModal(false)}>
-          <div className="relative bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden" onClick={(e) => e.stopPropagation()}>
+        <div 
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in" 
+          onClick={() => setShowBookDemoModal(false)}
+        >
+          <div 
+            className="relative bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden animate-slide-up" 
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Modal Header */}
-            <div className="flex items-center justify-between p-6 border-b border-neutral-200 dark:border-neutral-800">
+            <div className="flex items-center justify-between p-6 border-b border-neutral-200 dark:border-neutral-800 flex-shrink-0">
               <div>
                 <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">Book A Demo</h2>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Schedule a personalized demo with our team</p>
               </div>
               <button
                 onClick={() => setShowBookDemoModal(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
+                className="w-10 h-10 flex items-center justify-center rounded-lg text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
+                aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
             
             {/* Cal.com Embed */}
-            <div className="p-6 overflow-y-auto max-h-[calc(90vh-100px)]">
-              <div 
-                className="cal-inline" 
-                data-cal-link="team/exportgenius/30min"
-                data-cal-config='{"layout":"month_view","theme":"light"}'
-                style={{ width: '100%', height: '600px', overflow: 'scroll' }}
-              ></div>
+            <div className="flex-1 overflow-y-auto bg-neutral-50 dark:bg-neutral-950">
+              <div className="p-6">
+                <div 
+                  className="cal-inline bg-white dark:bg-neutral-900 rounded-lg shadow-inner" 
+                  data-cal-link="team/exportgenius/30min"
+                  data-cal-config='{"layout":"month_view","theme":"auto"}'
+                  style={{ width: '100%', minHeight: '600px' }}
+                ></div>
+              </div>
             </div>
           </div>
         </div>
